@@ -1,0 +1,42 @@
+<div class="container-fluid form">
+  <div class="row form-row ">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="card my-5">
+              <div class="card-body">
+                  <h5 class="card-title text-center">Sign In</h5>
+                  <div>
+                      <div id="errorMsg" *ngIf="errorMessage">
+                          <span>{{errorMessage}}</span>
+                      </div>
+                      <form action="" [formGroup]="SigninForm" (ngSubmit)="signinUser()">
+                          <!-- <div class="form-group form-signup">
+                              <input _ngcontent-c0="" class="form-control form-control-lg" placeholder="Username"
+                                     type="text" id="username" formControlName="username" />
+                              <span *ngIf="!SignupForm.get('username').valid && SignupForm.get('username').touched"
+                                    class="help-block">Please enter a valid username!</span>
+                          </div> -->
+                          <div class="form-group">
+                              <input _ngcontent-c0="" class="form-control form-control-lg" placeholder="E-mail" type="text"
+                                     id="email" formControlName="email" />
+                              <span *ngIf="!SigninForm.get('email').valid && SigninForm.get('email').touched" class="help-block">
+                                  Please
+                                  enter a valid email!
+                              </span>
+                          </div>
+                          <div class="form-group">
+                              <input class="form-control form-control-lg" placeholder="Password" type="password"
+                                     formControlName="password" />
+                              <span *ngIf="!SigninForm.get('password').valid && SigninForm.get('password').touched"
+                                    class="help-block">Password is required and must have more than 4 characters!</span>
+                          </div>
+                          <div class="form-group">
+                              <button type="submit" class=" btn btn-primary" (ngSubmit)="signinUser()">Sign In</button>
+                              <a routerLink="../request-reset-password" class="btn btn-link">Forget Password</a>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
