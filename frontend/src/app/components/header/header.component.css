@@ -1,0 +1,29 @@
+header {
+  background-color: #6699cc;
+  display: block;
+  grid-template-columns: 300px 1fr;
+}
+#img_logo {
+  margin: 5px 5px;
+  float: left;
+  width: 360px;
+  height: 75px;
+}
+nav {
+  justify-self: end;
+}
+
+nav > ul > li {
+  display: inline-block;
+  padding: 16px 32px;
+}
+
+nav > ul > li > a {
+  font-size: 1.2rem;
+  color: white;
+  text-decoration: none;
+}
+#social-icon {
+  width: 10px;
+  height: 10px;
+}
