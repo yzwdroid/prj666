@@ -1,7 +1,8 @@
 header {
   background-color: #6699cc;
   display: block;
-  grid-template-columns: 300px 1fr;
+  color:white;
+
 }
 #img_logo {
   margin: 5px 5px;
