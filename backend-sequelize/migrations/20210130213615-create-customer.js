@@ -11,7 +11,6 @@ module.exports = {
       email: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
       },
       password: {
         type: Sequelize.STRING,
@@ -37,6 +36,12 @@ module.exports = {
         allowNull: true,
         type: Sequelize.DATE,
       },
+      indexes: [
+        {
+          unique: true,
+          fields: ["email"],
+        },
+      ],
     });
   },
   down: async (queryInterface, Sequelize) => {
