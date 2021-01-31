@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true,
       },
       product_name: { type: DataTypes.STRING, allowNull: false },
-      product_price: DataTypes.INTEGER,
+      product_price: DataTypes.DECIMAL(5, 2),
       product_description: DataTypes.STRING,
     },
     {
