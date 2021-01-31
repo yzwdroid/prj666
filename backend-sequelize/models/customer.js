@@ -13,8 +13,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   Customer.init(
     {
-      email: DataTypes.STRING,
-      password: DataTypes.STRING,
+      customer_id: { type: DataTypes.INTEGER, primaryKey: true },
+      email: { type: DataTypes.STRING, unique: true, allowNull: false },
+      password: { type: DataTypes.STRING, unique: true, allowNull: false },
       first_name: DataTypes.STRING,
       last_name: DataTypes.STRING,
       billing_address_id: DataTypes.INTEGER,
@@ -23,12 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Customer",
-      indexes: [
-        {
-          unique: true,
-          fields: ["email"],
-        },
-      ],
+      indexes: [],
     }
   );
   return Customer;

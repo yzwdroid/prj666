@@ -13,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Option.init(
     {
-      option_name: DataTypes.STRING,
+      option_id: { type: DataTypes.INTEGER, primaryKey: true },
+      option_name: { type: DataTypes.INTEGER, allowNull: false },
     },
     {
       sequelize,
