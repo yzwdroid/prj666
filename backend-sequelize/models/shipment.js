@@ -13,8 +13,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   Shipment.init(
     {
-      shipment_id: { type: DataTypes.INTEGER, primaryKey: true },
-      order_id: DataTypes.INTEGER,
+      shipment_id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV1,
+        primaryKey: true,
+      },
+      order_id: DataTypes.UUID,
       shipping_company: DataTypes.STRING,
       tracking_id: DataTypes.STRING,
       shipment_date: { type: DataTypes.DATE, defaultValue: sequelize.NOW },

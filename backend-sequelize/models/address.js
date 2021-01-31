@@ -13,7 +13,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Address.init(
     {
-      address_id: { type: DataTypes.INTEGER, primaryKey: true },
+      address_id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV1,
+        primaryKey: true,
+      },
       address_line_1: { type: DataTypes.STRING, allowNull: false },
       address_line_2: DataTypes.STRING,
       city: { type: DataTypes.STRING, allowNull: false },
