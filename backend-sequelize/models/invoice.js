@@ -13,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Invoice.init(
     {
-      invoice_date: DataTypes.STRING,
+      invoice_id: { type: DataTypes.INTEGER, primaryKey: true },
+      invoice_date: { type: DataTypes.DATE, defaultValue: sequelize.NOW },
       payment_method: DataTypes.STRING,
     },
     {

@@ -13,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Order.init(
     {
-      order_date: DataTypes.DATE,
+      order_id: { type: DataTypes.INTEGER, primaryKey: true },
+      order_date: { type: DataTypes.DATE, defaultValue: sequelize.NOW },
       order_status: DataTypes.STRING,
       order_shipping_address_id: DataTypes.INTEGER,
       invoice_id: DataTypes.INTEGER,
