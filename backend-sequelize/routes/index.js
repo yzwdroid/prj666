@@ -17,6 +17,5 @@ module.exports = (app) => {
       res.json(customers);
     });
   });
-
   app.post("/api/customers", customerController.create);
 };
