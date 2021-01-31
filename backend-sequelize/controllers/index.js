@@ -1,4 +1,4 @@
-const customers = require("./Customers");
+const customer = require("./customer");
 module.exports = {
-  customers,
+  customer: customer,
 };
