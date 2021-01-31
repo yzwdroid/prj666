@@ -13,4 +13,8 @@ module.exports = {
       .then((Customer) => res.status(201).send(Customer))
       .catch((error) => res.status(400).send(error));
   },
+  findAll() {
+    const customer = Customer.findAll();
+    return customer;
+  },
 };
