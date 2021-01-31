@@ -13,7 +13,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Option.init(
     {
-      option_id: { type: DataTypes.INTEGER, primaryKey: true },
+      option_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       option_name: { type: DataTypes.INTEGER, allowNull: false },
     },
     {
