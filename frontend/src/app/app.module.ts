@@ -14,7 +14,8 @@ import { SignupComponent } from './components/signup/signup.component';
 import { RequestResetComponent } from './components/request-reset/request-reset.component';
 import { ResponseResetComponent } from './components/response-reset/response-reset.component';
 import { HomeComponent } from './components/home/home.component';
-
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,9 @@ import { HomeComponent } from './components/home/home.component';
     SignupComponent,
     RequestResetComponent,
     ResponseResetComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
