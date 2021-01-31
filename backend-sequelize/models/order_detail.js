@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
   Order_Detail.init(
     {
       order_detail_id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV1,
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
       },
       order_id: {

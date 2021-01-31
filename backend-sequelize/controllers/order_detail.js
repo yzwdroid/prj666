@@ -43,13 +43,11 @@ module.exports = {
 
     return Promise.all([queryOne, queryTwo])
       .then((responses) => {
-        console.log(responses[0]);
-        console.log(responses[1]);
         product_array = [];
         responses[1][0].forEach((item) => {
           product_array.push({
             product_name: item.product_name,
-            product_item: item.quantity,
+            product_quantity: item.quantity,
             product_price: item.product_price,
           });
         });
