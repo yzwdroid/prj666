@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
         references: { model: "Order", key: "order_id" },
       },
+      transaction_id: DataTypes.STRING,
     },
     {
       sequelize,

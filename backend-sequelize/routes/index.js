@@ -1,4 +1,4 @@
-var fs = require("fs");
+let fs = require("fs");
 
 module.exports = (app) => {
   app.get("/api", (req, res) =>
@@ -9,7 +9,7 @@ module.exports = (app) => {
 
   fs.readdirSync(__dirname).forEach(function (file) {
     if (file == "index.js") return;
-    var name = file.substr(0, file.indexOf("."));
+    let name = file.substr(0, file.indexOf("."));
     require("./" + name)(app);
   });
 };
