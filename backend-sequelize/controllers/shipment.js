@@ -41,4 +41,11 @@ module.exports = {
       })
       .catch((error) => res.status(400).json({ message: "Error" }));
   },
+  delete(req,res) {
+    return Shipment.destroy({where: { shipment_id: req.params.id }})
+    .then(() => {
+      res.status(200).json({ message: "Shipment deleted successfully"})
+    })
+    .catch((error) => res.status(204).json({ message: "delete error"}))
+  },
 };

@@ -48,4 +48,11 @@ module.exports = {
       })
       .catch((error) => res.status(400).json({ message: "Error" }));
   },
+  delete(req,res) {
+    return Customer.destroy({where: { id: req.params.id }})
+    .then(() => {
+      res.status(200).json({ message: "customer deleted successfully"})
+    })
+    .catch((error) => res.status(204).json({ message: "delete error"}))
+  },
 };
