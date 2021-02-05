@@ -13,9 +13,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   Token.init(
     {
-      token_id: { type: DataTypes.INTEGER, primaryKey: true },
-      email: { type: DataTypes.INTEGER, allowNull: false },
-      token: { type: DataTypes.INTEGER, allowNull: false },
+      token_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, },
+      email: { type: DataTypes.STRING, unique: true, allowNull: false },
+      token: { type: DataTypes.STRING, allowNull: false },
     },
     {
       sequelize,
