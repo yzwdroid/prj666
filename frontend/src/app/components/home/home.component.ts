@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthService } from '../../auth.service';
-import { Customer } from '../../Customer';
+import { AuthService } from '../../service/auth.service';
+import { Customer } from '../../model/Customer';
 
 @Component({
   selector: 'app-home',

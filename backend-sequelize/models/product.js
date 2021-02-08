@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
+      product_img: { type: DataTypes.STRING },
       product_name: { type: DataTypes.STRING, allowNull: false },
       product_price: DataTypes.DECIMAL(5, 2),
       product_description: DataTypes.STRING,
