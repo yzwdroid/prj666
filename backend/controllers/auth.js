@@ -31,14 +31,20 @@ module.exports = {
     });
   },
   async GetUser(req, res) {
-    const user = await User.find();
-    res.json(user);
+    return UserSql.GetUser()
+    .then((users) => {
+      console.log(users);
+      res.status(201).json({ message: "Get users successfully", users });
+    })
+    .catch(() => {
+      res.status(500).json({ message: "Error occured for getting users" });
+    });
   },
   async LoginUser(req, res) {
     try {
         let user = await UserSql.FindUser(req.body);
         if (bcrypt.compareSync(req.body.password, user.password)) {
-            res.status(200).json({ message: "Login successfully." });
+            return res.status(200).json({ message: "Login successfully." });
         } else {
             return res.status(409).json({ message: "Password or email is wrong" });
         }

@@ -5,7 +5,8 @@ import { SignupComponent } from './components/signup/signup.component';
 import { RequestResetComponent } from './components/request-reset/request-reset.component';
 import { ResponseResetComponent } from './components/response-reset/response-reset.component';
 import { HomeComponent } from './components/home/home.component';
-
+import { ProductListComponent } from './components/product-list/product-list.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,14 @@ const routes: Routes = [
   {
       path: 'response-reset-password/:token',
       component: ResponseResetComponent
+    },
+    {
+      path: 'product-list',
+      component: ProductListComponent
+    },
+    {
+      path: 'product-list/:id',
+      component: ProductDetailComponent
     },
   {
     path: '**',

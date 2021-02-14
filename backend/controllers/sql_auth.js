@@ -1,4 +1,4 @@
-const { NewPassword } = require("./auth");
+const { NewPassword, GetUser } = require("./auth");
 const mysql = require("./helper/mysql_connection");
 
 module.exports = {
@@ -99,5 +99,15 @@ module.exports = {
       if (err) throw console.log(err);
       console.log("Reset password successfully!");
     });
+  },
+  async GetUser(){
+    sql = `SELECT * FROM Customers`;
+    try {
+      let [rows, fields] = await mysql.client_promise.execute(sql);
+      console.log(rows);
+      return rows;
+    } catch (err) {
+      console.log(err);
+    }
   }
 };

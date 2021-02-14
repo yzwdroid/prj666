@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AuthService } from '../../service/auth.service';
+import { Customer } from '../../model/Customer';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  customers: Array<Customer>
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.getCustomers().subscribe(data => {
+      console.log(data);
+      if (data.length > 0) {
+        this.customers = data;
+        console.log(this.customers);
+      }
+    });
   }
 
 }
