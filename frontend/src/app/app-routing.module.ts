@@ -7,6 +7,8 @@ import { ResponseResetComponent } from './components/response-reset/response-res
 import { HomeComponent } from './components/home/home.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { ShoppingCartComponent } from './components/shoppingCart/shoppingCart.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 const routes: Routes = [
   {
@@ -26,25 +28,37 @@ const routes: Routes = [
     component: RequestResetComponent,
   },
   {
-      path: 'response-reset-password/:token',
-      component: ResponseResetComponent
-    },
-    {
-      path: 'product-list',
-      component: ProductListComponent
-    },
-    {
-      path: 'product-list/:id',
-      component: ProductDetailComponent
-    },
+    path: 'response-reset-password/:token',
+    component: ResponseResetComponent,
+  },
+  {
+    path: 'product-list',
+    component: ProductListComponent,
+  },
+  {
+    path: 'product-list/:id',
+    component: ProductDetailComponent,
+  },
+  {
+    path: 'shopping-cart',
+    component: ShoppingCartComponent,
+  },
+  {
+    path: 'checkout',
+    component: CheckoutComponent,
+  },
+  {
+    path: 'response-reset-password/:token',
+    component: ResponseResetComponent,
+  },
   {
     path: '**',
-    redirectTo: 'sign-in'
-  }
+    redirectTo: 'sign-in',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
