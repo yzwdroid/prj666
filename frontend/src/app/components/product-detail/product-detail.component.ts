@@ -10,14 +10,19 @@ import { ProductService } from '../../service/product.service';
 })
 export class ProductDetailComponent implements OnInit {
 
-  product: Product;
+  product = new Product();
+  private querySub: any;
 
-  constructor(private data:ProductService, private router: Router, private route: ActivatedRoute,) { }
+  constructor(private data:ProductService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(param=>{
-      this.data.getOne(param['id']).subscribe(data=>this.product = data);
+    this.querySub = this.route.params.subscribe(params=>{
+      this.data.getOne(params['id']).subscribe(data=>this.product = data);
     })
+  }
+
+  ngOnDestroy() {
+    if(this.querySub) this.querySub.unsubscribe();
   }
 
 }

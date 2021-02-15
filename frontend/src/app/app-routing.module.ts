@@ -40,6 +40,10 @@ const routes: Routes = [
     component: ProductDetailComponent,
   },
   {
+    path: 'product-detail',
+    component: ProductDetailComponent,
+  },
+  {
     path: 'shopping-cart',
     component: ShoppingCartComponent,
   },

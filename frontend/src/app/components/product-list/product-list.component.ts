@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../model/Product';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../service/product.service';
 
 @Component({
@@ -11,11 +11,38 @@ import { ProductService } from '../../service/product.service';
 export class ProductListComponent implements OnInit {
 
   products: Array<Product>
+  page: number = 1;
+  category: string = null;
+  querySub: any;
 
-  constructor(private data:ProductService, private router: Router) { }
+  constructor(private data:ProductService, private route: ActivatedRoute, private router: Router) { }
+
+  getPage(num) {
+    this.querySub = this.data.getProducts(num, this.category).subscribe(data => {
+      if (data.length > 0) {
+        this.products = data;//.sort((a,b)=>Date.parse(a.postDate)-Date.parse(b.postDate))
+        this.page = num;
+        console.log(this.products);
+      }
+    });
+    window.scrollTo(0,0);
+  }
 
   ngOnInit(): void {
-    this.data.getAll().subscribe(data=>this.products = data);
+    //this.data.getAll().subscribe(data=>this.products = data);
+    this.querySub = this.route.queryParams.subscribe(params => {
+
+      if(params['category']){
+      this.category = params['category'];
+      }else{
+      this.category = null;
+      }
+      this.getPage(+params['page'] || 1);
+    });
+  }
+
+  ngOnDestroy(){
+    if(this.querySub) this.querySub.unsubscribe();
   }
 
 }
