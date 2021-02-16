@@ -1,0 +1,113 @@
+<div class="container mb-4">
+  <main>
+    <div class="py-5 text-center">
+      <h2>Shopping Cart</h2>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-md-5 col-lg-4 order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-muted">Summary</span>
+          <span class="badge bg-secondary rounded-pill">{{products.length}}</span>
+        </h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-sm" *ngFor="let product of products"
+            [product]="product">
+            <div>
+              <h6 class="my-0">{{product.product_name}}</h6>
+              <small class="text-muted">{{product.product_description}}</small>
+            </div>
+            <span class="text-muted">${{product.product_price}} x {{product.product_quantity}} =
+              ${{(product.product_price
+              * product.product_quantity).toFixed(2)}}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <div>
+              <h6 class="my-0 mb-1">Total (CAD)</h6>
+              <small class="text-muted">*Tax calculated at payment</small>
+              <br>
+              <small class="text-muted">*Apply promo codes at checkout</small>
+            </div>
+            <strong>${{total.toFixed(2)}}</strong>
+          </li>
+        </ul>
+
+      </div>
+      <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3">Your Shopping Cart</h4>
+        <form class="needs-validation" novalidate>
+          <div *ngIf="products.length === 0; else renderProducts">
+            <p>No products in your shopping cart.</p>
+            <hr class="my-4">
+          </div>
+          <ng-template #renderProducts>
+            <div *ngFor="let product of products" [product]="product">
+              <!-- Item -->
+              <div class="row mb-4">
+                <div class="col-md-5 col-lg-3 col-xl-3">
+                  <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+                    <a href="#!">
+                      <div class="mask waves-effect waves-light">
+                        <img class="img-fluid w-100" src="/assets/items/fliers.jpg">
+                        <div class="mask rgba-black-slight waves-effect waves-light"></div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-7 col-lg-9 col-xl-9">
+                  <div>
+                    <div class="d-flex justify-content-between">
+                      <div>
+                        <h5>{{product.product_name}}</h5>
+                        <p class="mb-3 text-muted text-uppercase small">{{product.product_description}}</p>
+                      </div>
+                      <div>
+                        <label class="form-label">Quantity:</label>
+                        <select *ngIf="product.product_quantity < 10" class="form-select" required
+                          (change)="changeQuantity(product, $event.target.value)" [value]="product.product_quantity">
+                          <option [value]="1">1</option>
+                          <option [value]="2">2</option>
+                          <option [value]="3">3</option>
+                          <option [value]="4">4</option>
+                          <option [value]="5">5</option>
+                          <option [value]="6">6</option>
+                          <option [value]="7">7</option>
+                          <option [value]="8">8</option>
+                          <option [value]="9">9</option>
+                          <option [value]="10">10+</option>
+                        </select>
+                        <input *ngIf="product.product_quantity >= 10" class="form-control" type="number" required
+                          (change)="changeQuantity(product, $event.target.value)" value="10" min="1" max="1000"
+                          oninput="this.value = Math.abs(this.value).toString().slice(0,4)">
+                      </div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div>
+                        <a type="button"
+                          class="card-link-secondary small text-uppercase mr-3 btn btn-sm btn-outline-secondary"
+                          (click)="removeItem(product)"><i class="fas fa-trash-alt mr-1"></i> Remove item </a>
+                      </div>
+                      <p class="mb-0"><span><strong>${{product.product_price}}</strong></span></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr class="my-4">
+              <!-- Item -->
+            </div>
+          </ng-template>
+          <h4 class="mb-3">Payment</h4>
+
+          <div class="my-3">
+            <p>Currently only PayPal is accepted when placing online orders.</p>
+          </div>
+
+          <hr class="my-4">
+
+          <button class="w-100 btn btn-primary btn-lg" type="submit" routerLink="/checkout">Continue to
+            checkout</button>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>

@@ -7,7 +7,7 @@ import { ResponseResetComponent } from './components/response-reset/response-res
 import { HomeComponent } from './components/home/home.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
-import { ShoppingCartComponent } from './components/shoppingCart/shoppingCart.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 
 const routes: Routes = [

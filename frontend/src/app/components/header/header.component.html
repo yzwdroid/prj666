@@ -81,11 +81,11 @@
         <img src="/assets/img/ah-logo.png" id="img_logo" alt="logo" />
         <nav>
           <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/product-list">Products</a></li>
-
-            <li><a href="/sign-up">Create Account</a></li>
-            <li><a href="/sign-in">Login</a></li>
+            <li><a routerLink="/">Home</a></li>
+            <li><a routerLink="/product-list">Products</a></li>
+            <li><a routerLink="/sign-up">Create Account</a></li>
+            <li><a routerLink="/sign-in">Login</a></li>
+            <li><a routerLink="/shopping-cart">Shopping Cart <span class="badge bg-secondary rounded-pill">{{shoppingCartTotal}}</span></a></li>
           </ul>
         </nav>
       </a>

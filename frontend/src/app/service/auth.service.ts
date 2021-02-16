@@ -5,9 +5,7 @@ import { Observable } from 'rxjs';
 //const BASEURL = 'http://localhost:3000/api/resetpassword';
 const BASEURL = 'http://localhost:8000/api';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
   constructor(private http: HttpClient) { }
 
