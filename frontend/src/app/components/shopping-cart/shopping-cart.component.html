@@ -48,7 +48,12 @@
                   <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
                     <a href="#!">
                       <div class="mask waves-effect waves-light">
-                        <img class="img-fluid w-100" src="/assets/items/fliers.jpg">
+                        <img [hidden]="loading" (load)="onLoad()"
+                          *ngIf="product.product_img != null; else renderPlaceholderImg"
+                          src="{{apiPicUrl}}/{{product.product_img}}" class="img-fluid">
+                        <ng-template #renderPlaceholderImg>
+                          <img class="img-fluid w-100" src="/assets/img/noimageavailable.png">
+                        </ng-template>
                         <div class="mask rgba-black-slight waves-effect waves-light"></div>
                       </div>
                     </a>

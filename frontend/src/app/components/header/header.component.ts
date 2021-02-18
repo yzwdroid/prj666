@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
   constructor(private shoppingCartService: ShoppingCartService) {}
 
   ngOnInit(): void {
+    this.shoppingCartTotal = this.shoppingCartService.shoppingCartList.length.toString();
     this.shoppingCartService.shoppingCartListChange.subscribe(value => this.shoppingCartTotal = value.toString())
   }
 }

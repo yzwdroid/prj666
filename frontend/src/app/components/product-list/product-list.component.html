@@ -2,18 +2,23 @@
   <div class="container">
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 justify-content-center">
-      <div *ngIf="!products; else renderProducts" class="spinner-border" role="status">
+      <div *ngIf="products.length === 0; else renderProducts" class="spinner-border" role="status">
         <span class="sr-only">Loading...</span>
       </div>
       <ng-template #renderProducts>
         <div *ngFor="let product of products" [product]="product" class="col">
           <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
-              role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-              <title>Placeholder</title>
-              <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Product
-                picture</text>
-            </svg>
+            <div *ngIf="loading && product.product_img != null" class="d-flex justify-content-center"
+              style="height: 268.05px;">
+              <div class="spinner-border" style="margin: auto;" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+            <img [hidden]="loading" (load)="onLoad()" *ngIf="product.product_img != null; else renderPlaceholderImg"
+              src="{{apiPicUrl}}/{{product.product_img}}" class="img-fluid">
+            <ng-template #renderPlaceholderImg>
+              <img class="img-fluid w-100" src="/assets/img/noimageavailable.png">
+            </ng-template>
 
             <div class="card-body">
               <h4>{{product.product_name}}</h4>
@@ -24,11 +29,12 @@
                     <h3 class="h4"><button type="button" class="btn btn-sm btn-outline-secondary">Detail</button></h3>
                   </a>
                   <a [routerLink]="">
-                    <h3 class="h4"><button type="button" class="btn btn-sm btn-outline-secondary"
-                        (click)="addToCart(product)">Add to cart</button></h3>
+                    <h3 class="h4"><button type="button" [disabled]="isInCart(product)"
+                        class="btn btn-sm btn-outline-secondary" (click)="addToCart(product)"><span
+                          *ngIf="isInCart(product)">In cart</span><span *ngIf="!isInCart(product)">Add to
+                          cart</span></button></h3>
                   </a>
                 </div>
-                <small class="text-muted">9 mins</small>
               </div>
             </div>
           </div>

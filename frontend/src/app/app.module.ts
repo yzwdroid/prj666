@@ -21,6 +21,7 @@ import { AuthService } from './service/auth.service';
 import { ShoppingCartService } from './service/shoppingcart.service';
 import { ProductService } from './service/product.service';
 import { RouterModule } from '@angular/router';
+import { CookieModule } from 'ngx-cookie';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     CommonModule,
     RouterModule,
+    CookieModule.forRoot()
   ],
   providers: [AuthService, ShoppingCartService, ProductService, HttpClientModule],
   bootstrap: [AppComponent]

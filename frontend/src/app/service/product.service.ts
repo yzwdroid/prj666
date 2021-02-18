@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from './../../environments//environment';
 
-const BASEURL = 'http://localhost:8000/api';
+const BASEURL = environment.apiUrl;
 
 @Injectable()
 export class ProductService {

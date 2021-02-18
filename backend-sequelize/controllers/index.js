@@ -11,5 +11,5 @@ module.exports = {
   order_detail: order_detail,
   shipment: shipment,
   product: product,
-  token: token
+  token: token,
 };

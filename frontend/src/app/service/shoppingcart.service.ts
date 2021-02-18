@@ -1,13 +1,32 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Product } from '../model/Product';
+import { CookieService, CookieOptions } from 'ngx-cookie';
 
 @Injectable()
 export class ShoppingCartService {
   shoppingCartList: Array<Product> = [];
   shoppingCartListChange: Subject<number> = new Subject<number>();
+  cookieOptions: CookieOptions = { sameSite: 'strict' };
 
-  constructor() {}
+  constructor(private cookieService: CookieService) {
+    let savedList = cookieService.getObject('shoppingcart') as Array<Product>;
+    if (savedList) {
+      this.shoppingCartList = savedList
+    }
+  }
+
+  ngOnInit() {}
+
+  isInCart(product) {
+    const productExistInCart = this.shoppingCartList.find(
+      ({ product_id }) => product_id === product.product_id
+    );
+
+    if (productExistInCart) return true;
+
+    return false;
+  }
 
   addToCart(product) {
     // find product by product_id
@@ -19,15 +38,30 @@ export class ShoppingCartService {
       this.shoppingCartList.push({ ...product, product_quantity: 1 });
       this.shoppingCartListChange.next(this.shoppingCartList.length);
     }
+
+    this.cookieService.putObject(
+      'shoppingcart',
+      this.shoppingCartList,
+      this.cookieOptions
+    );
   }
 
   removeFromCart(product) {
-    this.shoppingCartList.find(({ product_id }) => {
-      if (product_id === product.product_id) {
-        this.shoppingCartList.pop();
-        this.shoppingCartListChange.next(this.shoppingCartList.length);
+    let thisList = this.shoppingCartList;
+
+    for (let i = 0; i < thisList.length; i++) {
+      if (thisList[i].product_id === product.product_id) {
+        thisList.splice(i, 1);
+        i--;
       }
-    });
+    }
+    this.shoppingCartListChange.next(this.shoppingCartList.length);
+
+    this.cookieService.putObject(
+      'shoppingcart',
+      this.shoppingCartList,
+      this.cookieOptions
+    );
   }
 
   updateQuantity(product, quantity) {
@@ -37,7 +71,11 @@ export class ShoppingCartService {
 
     productExistInCart.product_quantity = quantity;
 
-    console.log(this.shoppingCartList);
+    this.cookieService.putObject(
+      'shoppingcart',
+      this.shoppingCartList,
+      this.cookieOptions
+    );
   }
 
   getTotal() {
@@ -47,5 +85,9 @@ export class ShoppingCartService {
     });
 
     return total;
+  }
+
+  getCookie(key: string) {
+    return this.cookieService.get(key);
   }
 }
