@@ -18,6 +18,11 @@ export class ProductListComponent implements OnInit {
   shoppingCartList: Array<Product> = [];
   apiPicUrl: string = environment.apiUrl + "/pictures";
   loading: boolean = true;
+  categories: string[] = ["Books", "Business Cards", "Calendars", "Carbonless Forms", "Copy & Prints",
+"Door Hangers", "Envelopes", "Flyers & Brochures", "Feature Sheets", "Letterheads",
+"Notepads", "Postcards", "Pocket Folders", "Tickets", "Magnets", "Posters",
+"Real Estate Signs", "Banner & Displays", "Window Graphics", "Sign Accessories"];
+
 
   constructor(
     private data: ProductService,
