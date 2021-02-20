@@ -18,7 +18,7 @@ export class ProductService {
   }
 
   public getProducts(page, category): Observable<any> {
-    const perPage = 3;
+    const perPage = 9;
 
     let params = {
       page: page,
