@@ -17,7 +17,36 @@ module.exports = {
       })
       .catch((error) => res.status(400).json({ message: "Error" }));
   },
+  findPage(req, res) {
+    console.log(req.query);
+    page = Number(req.query.page);
+    perPage = Number(req.query.perPage);
+    category = req.query.category;
+    console.log(page);
+    console.log(perPage);
+
+    if(+page && +perPage){
+                    
+      let filter = {}; 
+      if(category) filter.category = category;
+
+      page = (+page) - 1;                      
+    }
+    
+    return Product.findAll(
+        {
+          limit: perPage,
+          offset: page * perPage
+        }
+      )
+      .then((product) => {
+        console.log(product);
+        res.status(201).send(product);
+      })
+      .catch((error) => res.status(400).json({ message: "Error" }));
+  },
   findOne(req, res) {
+    console.log(req.params.id);
     return Product.findOne({ where: { product_id: req.params.id } })
       .then((product) => {
         if (!product) {

@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ShoppingCartService } from '../../service/shoppingcart.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-
-  constructor() { }
+  @Input() product: any;
+  public shoppingCartTotal: string;
+  constructor(private shoppingCartService: ShoppingCartService) {}
 
   ngOnInit(): void {
+    this.shoppingCartTotal = this.shoppingCartService.shoppingCartList.length.toString();
+    this.shoppingCartService.shoppingCartListChange.subscribe(value => this.shoppingCartTotal = value.toString())
   }
-
 }
