@@ -28,7 +28,12 @@ export class ProductListComponent implements OnInit {
     private data: ProductService,
     private route: ActivatedRoute,
     private shoppingCartService: ShoppingCartService
-  ) {}
+  ) {
+    route.queryParamMap.subscribe(params =>{
+       this.category = params.get('category');
+
+    });
+  }
 
   getPage(num) {
     this.querySub = this.data
