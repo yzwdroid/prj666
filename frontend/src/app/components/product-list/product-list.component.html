@@ -6,10 +6,10 @@
         [class.active]="!category"
         routerLink="/product-list"
       >
-        All Categories 
+        All Categories
       </a>
-      <a 
-       *ngFor="let c of categories" 
+      <a
+       *ngFor="let c of categories"
        routerLink="/product-list"
        [queryParams]="{ category: c }"
        class="list-group-item list-group-item-action"
@@ -38,8 +38,10 @@
                     <span class="sr-only">Loading...</span>
                   </div>
                 </div>
+                <a [routerLink]="['/product-list', product.product_id]">
                 <img [hidden]="loading" (load)="onLoad()" *ngIf="product.product_img != null; else renderPlaceholderImg"
-                  src="{{apiPicUrl}}/{{product.product_img}}" class="img-fluid">
+                  src="{{apiPicUrl}}/{{product.product_img}}" class="img-fluid" height="200" width="265">
+                </a>
                 <ng-template #renderPlaceholderImg>
                   <img class="img-fluid w-100" src="/assets/img/noimageavailable.png">
                 </ng-template>
@@ -53,12 +55,12 @@
                         <h3 class="h4"><button type="button" class="btn btn-sm btn-outline-secondary">Detail</button>
                         </h3>
                       </a>
-                      <a [routerLink]="">
+                      <!-- <a [routerLink]="">
                         <h3 class="h4"><button type="button" [disabled]="isInCart(product)"
                             class="btn btn-sm btn-outline-secondary" (click)="addToCart(product)"><span
                               *ngIf="isInCart(product)">In cart</span><span *ngIf="!isInCart(product)">Add to
                               cart</span></button></h3>
-                      </a>
+                      </a> -->
                     </div>
                   </div>
                 </div>

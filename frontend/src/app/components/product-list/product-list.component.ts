@@ -44,7 +44,7 @@ export class ProductListComponent implements OnInit {
           this.page = num;
         }
       });
-    window.scrollTo(0, 0);
+    //window.scrollTo(0, 0);
   }
 
   addToCart(product) {
