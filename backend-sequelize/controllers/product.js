@@ -24,6 +24,7 @@ module.exports = {
     category = req.query.category;
     console.log(page);
     console.log(perPage);
+    console.log(category);
 
     if(+page && +perPage){
                     
@@ -32,11 +33,26 @@ module.exports = {
 
       page = (+page) - 1;                      
     }
+    if (category) {
+      return Product.findAll(
+        {
+          limit: perPage,
+          offset: page * perPage,
+          where: { category: category },
+        }
+      )
+        .then((product) => {
+          console.log(product);
+          res.status(201).send(product);
+        })
+        .catch((error) => res.status(400).json({ message: "Error" }));
+    }
     
     return Product.findAll(
         {
           limit: perPage,
-          offset: page * perPage
+          offset: page * perPage,
+          //where: { category: category },
         }
       )
       .then((product) => {
