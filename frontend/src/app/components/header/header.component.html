@@ -81,11 +81,12 @@
         <img src="/assets/img/ah-logo.png" id="img_logo" alt="logo" />
         <nav>
           <ul>
-            <li><a routerLink="/homepage">Home</a></li>
+            <li><a routerLink="/home">Home</a></li>
             <li><a routerLink="/product-list">Products</a></li>
-            <li><a routerLink="/sign-up">Create Account</a></li>
-            <li><a routerLink="/sign-in">Login</a></li>
-            <li><a routerLink="/shopping-cart">Shopping Cart <span class="badge bg-secondary rounded-pill">{{shoppingCartTotal}}</span></a></li>
+            <li *ngIf="!isLogin()"><a routerLink="/sign-up">Create Account</a></li>
+            <li *ngIf="!isLogin()"><a routerLink="/sign-in">Login</a></li>
+            <li *ngIf="isLogin()"><a (click)="logout()">Logout</a></li>
+            <li *ngIf="isLogin()"><a routerLink="/shopping-cart">Shopping Cart <span class="badge bg-secondary rounded-pill">{{shoppingCartTotal}}</span></a></li>
           </ul>
         </nav>
       </a>

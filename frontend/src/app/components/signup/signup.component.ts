@@ -43,7 +43,10 @@ export class SignupComponent implements OnInit {
       data => {
         this.SignupForm.reset();
         setTimeout(() => {
-          this.router.navigate(['sign-in']);
+          this.router.navigate(['sign-in'])
+          .then(()=>{
+            window.location.reload();
+          });
         }, 3000);
       },
       err => {
