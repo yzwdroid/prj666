@@ -48,10 +48,12 @@ const routes: Routes = [
   {
     path: 'shopping-cart',
     component: ShoppingCartComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'checkout',
     component: CheckoutComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'response-reset-password/:token',
