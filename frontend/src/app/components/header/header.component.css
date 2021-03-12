@@ -1,17 +1,35 @@
+@font-face {
+  font-family: 'Montserrat'; /*a name to be used later*/
+  src: url('https://fonts.googleapis.com/css?family=Montserrat'); /*URL to font*/
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
 header {
-  background-color: #6699cc;
+  background-color: white;
   display: block;
-  color:white;
+  color:#67B0FF;
+  font-family: 'Montserrat', sans-serif;
 
 }
 #img_logo {
-  margin: 5px 5px;
+  margin: 15px 50px 0px 60px;
   float: left;
   width: 360px;
-  height: 75px;
+  height: 95px;
+
 }
 nav {
   justify-self: end;
+
+position: absolute;
+width: 840px;
+height: 91px;
+left: 426px;
+top: 29px;
 }
 
 nav > ul > li {
@@ -20,11 +38,21 @@ nav > ul > li {
 }
 
 nav > ul > li > a {
-  font-size: 1.2rem;
-  color: white;
+  font-size: 1.1rem;
+  color:#67B0FF;
   text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
 }
 #social-icon {
   width: 10px;
   height: 10px;
 }
+#shopping_cart{
+  width: 43px;
+height: 34px;
+}
+#badge bg-secondary rounded-pill{
+  width: 51px;
+  height: 41px;
+}
+

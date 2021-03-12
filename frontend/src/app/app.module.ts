@@ -22,6 +22,8 @@ import { ShoppingCartService } from './service/shoppingcart.service';
 import { ProductService } from './service/product.service';
 import { RouterModule } from '@angular/router';
 import { CookieModule } from 'ngx-cookie';
+import { HomepageComponent } from './components/homepage/homepage.component';
+//import { HomepageComponent } from './components/homepage/homepage.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { CookieModule } from 'ngx-cookie';
     PagingComponent,
     ShoppingCartComponent,
     CheckoutComponent,
+    HomepageComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -49,6 +53,10 @@ import { CookieModule } from 'ngx-cookie';
     RouterModule,
     CookieModule.forRoot()
   ],
+  exports: [
+  HeaderComponent,
+  FooterComponent,
+],
   providers: [AuthService, ShoppingCartService, ProductService, HttpClientModule],
   bootstrap: [AppComponent]
 })

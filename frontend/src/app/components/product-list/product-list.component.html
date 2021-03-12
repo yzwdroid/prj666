@@ -1,3 +1,8 @@
+<div class="product-banner">
+  <img src="/assets/img/product page banner-01.png" id="product_banner" alt="logo" />
+</div>
+
+<div class="product">
 <div class="row">
   <div class="col-3">
     <div class="list-group">
@@ -6,10 +11,10 @@
         [class.active]="!category"
         routerLink="/product-list"
       >
-        All Categories 
+        All Categories
       </a>
-      <a 
-       *ngFor="let c of categories" 
+      <a
+       *ngFor="let c of categories"
        routerLink="/product-list"
        [queryParams]="{ category: c }"
        class="list-group-item list-group-item-action"
@@ -73,4 +78,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>
