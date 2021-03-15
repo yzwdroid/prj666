@@ -58,15 +58,25 @@
           <p>{{product?.product_description}}</p>
 
 
-          <div class="add-to-cart">
-            <div class="qty-label">
+            <!-- <div class="qty-label">
               Qty
               <div class="input-number">
-                <span class="qty-down">-</span>
-                <input #quantity [max]="product?.product_quantity" [min]="product?.product_quantity >= 1 ? product?.product_quantity : 0"
-                       readonly type="number" value="{{product?.product_quantity >= 1 ? 1 : 0}}">
-                <span class="qty-up">+</span>
+                <input #quantity [min]="product?.product_quantity >= 1 ? product?.product_quantity : 0"
+                       readonly type="number" [value]="product?.product_quantity >= 1 ? 1 : 0">
+                <span (click)="Increase()" class="btn btn-primary">-</span>
+                <span (click)="Decrease()" class="btn btn-primary">+</span>
               </div>
+            </div> -->
+
+            <div class="row">
+              <div class="col-2">
+                <button (click)="add(product)" class="btn btn-secondary btn-block">-</button>
+              </div>
+              <div class="col-1">{{ product?.product_quantity }}</div>
+              <div class="col-2">
+                <button (click)="minus(product)" class="btn btn-secondary btn-block">+</button>
+              </div>
+
             </div>
             <br/>
               <div class="d-flex justify-content-between align-items-center">
@@ -82,5 +92,251 @@
           </div>
         </div>
       </div>
+
+      <div class="input-group">
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+                <span class="glyphicon glyphicon-minus"></span>
+            </button>
+        </span>
+        <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </span>
+    </div>
+
       <!-- /Product details -->
+      <div class="row">
+        <div class="col"><hr></div>
+    </div>
+
+      <div class="container p-container-L">
+        <p class="paragraph p-text-L-Top" id="paragraph-1">We make it simple for you to order custom printed Books with your design. Simply choose from free design templates, or upload your own design. <br> </p>
+        <div class="responsive-picture p-picture-L">
+          <picture><!--[if IE 9]><video style="display: none;"><![endif]-->
+            <source srcset="{{apiPicUrl}}/{{product.product_img}}" media="(min-width: 78.625em)">
+            <source srcset="{{apiPicUrl}}/{{product.product_img}}" media="(min-width: 64em)">
+            <source srcset="{{apiPicUrl}}/{{product.product_img}}" media="(min-width: 53.125em)">
+            <source srcset="{{apiPicUrl}}/{{product.product_img}}" media="(min-width: 40em)">
+            <source srcset="{{apiPicUrl}}/{{product.product_img}}" media="(min-width: 28.125em)"><!--[if IE 9]></video><![endif]--><img alt="Placeholder Picture" src="./images/booklet-2.jpg"></picture>
+        </div>
+        <div class="container p-container-L2">
+          <div class="container p-list-title">
+            <h3 class="p-title-1">Full Size Booklets Pricing</h3>
+          </div>
+          <div class="container p-list-title1">
+            <div class="container p-list-title2">
+              <h3 class="p-title-2">QTY.</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-title-2">25</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-title-2">50</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-title-2">100</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-title-2">200</h3>
+            </div>
+          </div>
+          <div class="container p-list-1">
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">8Pg.</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$65.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$112.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$200.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$344.00</h3>
+            </div>
+          </div>
+          <div class="container p-list-1">
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">12Pg.</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$90.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$156.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$252.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$456.00</h3>
+            </div>
+          </div>
+          <div class="container p-list-1">
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">16Pg.</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$116.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$200.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$312.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$592.00</h3>
+            </div>
+          </div>
+          <div class="container p-list-1">
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">20Pg.</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$140.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$245.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$390.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$740.00</h3>
+            </div>
+          </div>
+          <div class="container p-list-1">
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">24Pg.</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$162.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$264.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$456.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$864.00</h3>
+            </div>
+          </div>
+          <div class="container p-list-1">
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">28Pg.</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$189.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$308.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$532.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$1008.00</h3>
+            </div>
+          </div>
+          <div class="container p-list-1">
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">32Pg.</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$208.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$336.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$592.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$1088.00</h3>
+            </div>
+          </div>
+          <div class="container p-list-1">
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">36Pg.</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$234.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$378.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$666.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$1224.00</h3>
+            </div>
+          </div>
+          <div class="container p-list-1">
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">40Pg.</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$260.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$420.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$720.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$1360.00</h3>
+            </div>
+          </div>
+          <div class="container p-list-1">
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">44Pg.</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$286.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$462.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$792.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$1408.00</h3>
+            </div>
+          </div>
+          <div class="container p-list-1">
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">48Pg.</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$300.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$480.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$864.00</h3>
+            </div>
+            <div class="container p-list-title2">
+              <h3 class="p-list-text-1">$1536.00</h3>
+            </div>
+          </div>
+        </div>
+        <ul class="unorder-list">
+          <li class="list-item">Prices base on color print on 100Lb gloss stock, Saddle Stitched</li>
+          <li class="list-item">Multiple paper stock options available</li>
+          <li class="list-item p-list-itwm-L">Quantities range from 25 to 2000</li>
+          <li class="list-item">Multiple bindery options available</li>
+        </ul>
+
+      </div>
 
