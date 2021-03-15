@@ -11,6 +11,8 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { AuthGuard } from './helper/auth.guard';
 
+const profileModule = () => import('./components/profile/profile.module').then(p => p.ProfileModule);
+
 const routes: Routes = [
   {
     path: 'home',
@@ -58,6 +60,11 @@ const routes: Routes = [
   {
     path: 'response-reset-password/:token',
     component: ResponseResetComponent,
+  },
+  {
+    path: 'profile',
+    loadChildren: profileModule,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',

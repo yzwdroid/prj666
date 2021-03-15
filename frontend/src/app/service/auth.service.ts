@@ -67,4 +67,10 @@ export class AuthService {
     return this.http.get(`${BASEURL}/customer`);
     //return this.http.get(`${BASEURL}`);
   }
+
+  updateUser(id: any, user: any): Observable<any> {
+    console.log(id);
+    console.log(user);
+    return this.http.put(`${BASEURL}/customer/update/${id}`, user);
+  }
 }
