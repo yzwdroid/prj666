@@ -70,11 +70,11 @@
 
             <div class="row">
               <div class="col-2">
-                <button (click)="add(product)" class="btn btn-secondary btn-block">-</button>
+                <button (click)="add(this.product)" class="btn btn-secondary btn-block">-</button>
               </div>
               <div class="col-1">{{ product?.product_quantity }}</div>
               <div class="col-2">
-                <button (click)="minus(product)" class="btn btn-secondary btn-block">+</button>
+                <button (click)="minus(this.product)" class="btn btn-secondary btn-block">+</button>
               </div>
 
             </div>
