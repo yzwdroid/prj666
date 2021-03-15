@@ -22,6 +22,8 @@ import { ShoppingCartService } from './service/shoppingcart.service';
 import { ProductService } from './service/product.service';
 import { RouterModule } from '@angular/router';
 import { CookieModule } from 'ngx-cookie';
+import { CheckoutService } from './service/checkout.service';
+import { NgxPayPalModule } from 'ngx-paypal';
 
 @NgModule({
   declarations: [
@@ -47,9 +49,10 @@ import { CookieModule } from 'ngx-cookie';
     HttpClientModule,
     CommonModule,
     RouterModule,
+    NgxPayPalModule,
     CookieModule.forRoot()
   ],
-  providers: [AuthService, ShoppingCartService, ProductService, HttpClientModule],
+  providers: [AuthService, ShoppingCartService, ProductService, HttpClientModule, CheckoutService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

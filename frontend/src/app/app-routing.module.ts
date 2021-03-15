@@ -48,7 +48,7 @@ const routes: Routes = [
   {
     path: 'shopping-cart',
     component: ShoppingCartComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: 'checkout',

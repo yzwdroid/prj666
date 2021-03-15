@@ -22,6 +22,8 @@ module.exports = (sequelize, DataTypes) => {
       order_status: DataTypes.STRING,
       order_shipping_address_id: DataTypes.INTEGER,
       order_number: DataTypes.INTEGER,
+      tax_rate: DataTypes.DOUBLE,
+      order_total_plus_tax: DataTypes.DOUBLE,
     },
     {
       sequelize,

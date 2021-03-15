@@ -86,7 +86,7 @@
             <li *ngIf="!isLogin()"><a routerLink="/sign-up">Create Account</a></li>
             <li *ngIf="!isLogin()"><a routerLink="/sign-in">Login</a></li>
             <li *ngIf="isLogin()"><a (click)="logout()">Logout</a></li>
-            <li *ngIf="isLogin()"><a routerLink="/shopping-cart">Shopping Cart <span class="badge bg-secondary rounded-pill">{{shoppingCartTotal}}</span></a></li>
+            <li><a routerLink="/shopping-cart">Shopping Cart <span class="badge bg-secondary rounded-pill">{{shoppingCartTotal}}</span></a></li>
           </ul>
         </nav>
       </a>
