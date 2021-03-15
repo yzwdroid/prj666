@@ -13,7 +13,8 @@ export class HeaderComponent implements OnInit {
   public shoppingCartTotal: string;
   customer: Customer
   constructor(private authService: AuthService, private shoppingCartService: ShoppingCartService) {
-    this.customer = JSON.parse(localStorage.getItem("user"));
+    //this.customer = JSON.parse(localStorage.getItem("user"));
+    this.customer = authService.userValue;
   }
 
   ngOnInit(): void {
@@ -22,6 +23,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
+    console.log(this.customer);
     this.authService.logoutUser();
   }
 

@@ -163,18 +163,44 @@ module.exports = {
       .catch((error) => res.status(400).json({ message: "Error" }));
   },
   update(req, res) {
-    return Customer.findOne({ where: { id: req.params.id } })
+    console.log(req.body);
+    return bcrypt.hash(req.body.password, 10, (err, hash) => {
+      if (err) {
+        return res.status(400).json({ message: "Error hashing password" });
+      }
+
+      let values;
+      if(req.body.password){
+        values = {
+          first_name: req.body.first_name,
+          last_name: req.body.last_name,
+          email: req.body.email,
+          password: hash,
+        }
+      }
+      else{
+        values = {
+          first_name: req.body.first_name,
+          last_name: req.body.last_name,
+          email: req.body.email
+        }
+      }
+      console.log(values);
+
+      Customer.findOne({ where: { customer_id: req.params.id } })
       .then((customer) => {
         if (!customer) {
           res.status(201).send({ message: "No record found" });
         }
-        const values = constructor(req);
         customer
           .update(values)
           .then((update) => res.status(201).send(update))
           .catch((error) => res.status(400).json({ message: "Error" }));
       })
       .catch((error) => res.status(400).json({ message: "Error" }));
+
+    });
+    
   },
   delete(req,res) {
     return Customer.destroy({where: { id: req.params.id }})

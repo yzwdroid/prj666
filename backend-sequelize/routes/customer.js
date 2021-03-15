@@ -12,5 +12,6 @@ module.exports = (app) => {
   app.post("/api/customer/req-reset-password", customerController.resetPassword);
   app.post("/api/customer/valid-password-token", tokenController.validToken);
   app.post("/api/customer/new-password", customerController.newPassword);
+  app.put("/api/customer/update/:id", customerController.update);
 
 };
