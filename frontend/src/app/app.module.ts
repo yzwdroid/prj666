@@ -24,6 +24,7 @@ import { RouterModule } from '@angular/router';
 import { CookieModule } from 'ngx-cookie';
 import { CheckoutService } from './service/checkout.service';
 import { NgxPayPalModule } from 'ngx-paypal';
+import { BannerComponent } from './components/banner/banner.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { NgxPayPalModule } from 'ngx-paypal';
     PagingComponent,
     ShoppingCartComponent,
     CheckoutComponent,
+    BannerComponent,
   ],
   imports: [
     BrowserModule,
