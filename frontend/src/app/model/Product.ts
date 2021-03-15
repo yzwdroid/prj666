@@ -5,4 +5,5 @@ export class Product{
   product_price: number;
   product_description: String;
   product_quantity: number;
+  category: String;
 }
