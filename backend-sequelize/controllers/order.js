@@ -118,7 +118,10 @@ module.exports = {
             }
           );
         });
-        res.status(201).json({ message: "Order placed successfully" });
+        res.status(201).json({
+          message: "Order placed successfully",
+          order_id: order.order_id,
+        });
       })
       .catch((err) => {
         res
@@ -149,7 +152,10 @@ module.exports = {
     //   });
   },
   async handleRequest(req, res) {
-    // 3. Call PayPal to set up a transaction
+    let results = await Order.findOne({
+      where: { order_id: req.params.id },
+    }).then((order) => order.order_total_plus_tax);
+
     const request = new paypal.orders.OrdersCreateRequest();
     request.prefer("return=representation");
     request.requestBody({
@@ -157,8 +163,8 @@ module.exports = {
       purchase_units: [
         {
           amount: {
-            currency_code: "USD",
-            value: "220.00",
+            currency_code: "CAD",
+            value: results,
           },
         },
       ],
@@ -170,7 +176,7 @@ module.exports = {
     } catch (err) {
       // 4. Handle any errors from the call
       console.error(err);
-      return res.send(500);
+      return res.sendStatus(500);
     }
 
     // 5. Return a successful response to the client with the order ID

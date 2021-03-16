@@ -5,6 +5,7 @@ import { ShoppingCartService } from 'src/app/service/shoppingcart.service';
 import { CheckoutService } from 'src/app/service/checkout.service';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 const BASEURL = environment.apiUrl;
 
 interface ProvinceSalesTax {
@@ -22,6 +23,7 @@ export class CheckoutComponent implements OnInit {
   total: number;
   discount: number;
   taxes: number;
+  order_id: string;
   checkoutForm = new FormGroup({
     firstName: new FormControl(null, [Validators.required]),
     lastName: new FormControl(),
@@ -57,6 +59,7 @@ export class CheckoutComponent implements OnInit {
   showSuccess: boolean;
 
   constructor(
+    private router: Router,
     private shoppingCartService: ShoppingCartService,
     private checkoutService: CheckoutService
   ) {}
@@ -98,21 +101,22 @@ export class CheckoutComponent implements OnInit {
     };
 
     const json = JSON.stringify(obj);
-    console.log(json);
 
     this.checkoutService.postCheckoutInfo(json).subscribe(
       (data) => {
-        // this.ResponseResetForm.reset();
-        // this.successMessage = data.message;
-        setTimeout(() => {
-          // this.successMessage = null;
-          // this.router.navigate(['sign-in']);
-        }, 3000);
+        this.checkoutForm.controls['firstName'].disable();
+        this.checkoutForm.controls['lastName'].disable();
+        this.checkoutForm.controls['address'].disable();
+        this.checkoutForm.controls['address2'].disable();
+        this.checkoutForm.controls['city'].disable();
+        this.checkoutForm.controls['country'].disable();
+        this.checkoutForm.controls['state'].disable();
+        this.checkoutForm.controls['zip'].disable();
+        this.order_id = data.order_id;
+        console.log('order_id: ' + this.order_id);
       },
       (err) => {
-        if (err.error.message) {
-          // this.errorMessage = err.error.message;
-        }
+        console.log(err);
       }
     );
   }
@@ -140,8 +144,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   isPayPalEnable() {
-    if (document.getElementsByClassName('validated').length > 0)
-      return true;
+    if (document.getElementsByClassName('validated').length > 0) return true;
     return false;
   }
 
@@ -149,10 +152,11 @@ export class CheckoutComponent implements OnInit {
     this.payPalConfig = {
       clientId:
         'AU-kwYEf--tHLzpT_CJy4iN6Km1LDtE7bQ2FgD5xbFkNfpp-4jlIal0-eJeiv7Nqk10zzhBVcWJm__pr',
+      currency: 'CAD',
       // for creating orders (transactions) on server see
       // https://developer.paypal.com/docs/checkout/reference/server-integration/set-up-transaction/
-      createOrderOnServer: (data) =>
-        fetch(`${BASEURL}/paypal`)
+      createOrderOnServer: () =>
+        fetch(`${BASEURL}/paypal/${this.order_id}`)
           .then((res) => res.json())
           .then((order) => order.orderID),
       onApprove: (data, actions) => {
@@ -169,11 +173,8 @@ export class CheckoutComponent implements OnInit {
         });
       },
       onClientAuthorization: (data) => {
-        console.log(
-          'onClientAuthorization - you should probably inform your server about completed transaction at this point',
-          data
-        );
         this.showSuccess = true;
+        this.router.navigate(['payment-finish'], { state: { id: data.id } });
       },
       onCancel: (data, actions) => {
         // console.log('OnCancel', data, actions);

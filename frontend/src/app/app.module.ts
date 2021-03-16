@@ -15,6 +15,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { PaymentFinishComponent } from './components/payment-finish/payment-finish.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { PagingComponent } from './components/paging/paging.component';
 import { AuthService } from './service/auth.service';
@@ -42,6 +43,7 @@ import { BannerComponent } from './components/banner/banner.component';
     ShoppingCartComponent,
     CheckoutComponent,
     BannerComponent,
+    PaymentFinishComponent,
   ],
   imports: [
     BrowserModule,
