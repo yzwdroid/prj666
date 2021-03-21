@@ -13,8 +13,7 @@ export class HeaderComponent implements OnInit {
   public shoppingCartTotal: string;
   customer: Customer
   constructor(private authService: AuthService, private shoppingCartService: ShoppingCartService) {
-    //this.customer = JSON.parse(localStorage.getItem("user"));
-    this.customer = authService.userValue;
+    this.customer = JSON.parse(localStorage.getItem("user"));
   }
 
   ngOnInit(): void {

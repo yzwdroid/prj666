@@ -5,12 +5,17 @@ import { Customer } from 'src/app/model/Customer';
 
 @Component({ templateUrl: 'details.component.html' })
 export class DetailsComponent {
-    //customer: Customer
-    customer = JSON.parse(localStorage.getItem('user')).user;//this.accountService.userValue;
+    customer: Customer
 
-    constructor(private authService: AuthService) {
-      // this.customer = this.authService.userValue;
-       console.log(this.customer);
-      // console.log(this.customer.email);
+    constructor(private authService: AuthService) {}
+
+    ngOnInit(): void {
+      var id = JSON.parse(localStorage.getItem('user')).user.customer_id;
+      this.authService.getCustomerById(id).subscribe(data =>{
+        if(data){
+          this.customer = data;
+        }
+      });
+
     }
 }

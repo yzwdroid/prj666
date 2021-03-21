@@ -167,11 +167,13 @@ module.exports = {
       .catch((error) => res.status(400).json({ message: "Error" }));
   },
   findOne(req, res) {
-    return Customer.findOne({ where: { id: req.params.id } })
+    console.log(req.params.id);
+    return Customer.findOne({ where: { customer_id: req.params.id } })
       .then((customer) => {
         if (!customer) {
           res.status(201).send({ message: "No record found" });
         }
+        //console.log(customer);
         res.status(201).send(customer);
       })
       .catch((error) => res.status(400).json({ message: "Error" }));
@@ -188,7 +190,6 @@ module.exports = {
         values = {
           first_name: req.body.first_name,
           last_name: req.body.last_name,
-          email: req.body.email,
           password: hash,
         }
       }
@@ -196,7 +197,6 @@ module.exports = {
         values = {
           first_name: req.body.first_name,
           last_name: req.body.last_name,
-          email: req.body.email
         }
       }
       console.log(values);
@@ -208,7 +208,8 @@ module.exports = {
         }
         customer
           .update(values)
-          .then((update) => res.status(201).send(update))
+          //.then((update) => res.status(201).send(update))
+          .then((user) => res.status(200).json({ message: "Update user information successfully.", user }))
           .catch((error) => res.status(400).json({ message: "Error" }));
       })
       .catch((error) => res.status(400).json({ message: "Error" }));
