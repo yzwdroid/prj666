@@ -10,11 +10,13 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import { AuthGuard } from './helper/auth.guard';
 
 const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'homepage',
@@ -51,10 +53,12 @@ const routes: Routes = [
   {
     path: 'shopping-cart',
     component: ShoppingCartComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'checkout',
     component: CheckoutComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'response-reset-password/:token',

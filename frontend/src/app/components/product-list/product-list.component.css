@@ -17,8 +17,9 @@
 }
 #product_banner{
 
-  width: 1440px;
-  height: 421px;
+
+  max-width:100%;
+  height: auto;
   float: left;
   margin:  0,0,20px,0;
 }

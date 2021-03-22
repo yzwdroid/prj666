@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from "@angular/common";
@@ -23,6 +23,8 @@ import { ProductService } from './service/product.service';
 import { RouterModule } from '@angular/router';
 import { CookieModule } from 'ngx-cookie';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import {FlexLayoutModule} from "@angular/flex-layout";
 //import { HomepageComponent } from './components/homepage/homepage.component';
 
 @NgModule({
@@ -51,12 +53,15 @@ import { HomepageComponent } from './components/homepage/homepage.component';
     HttpClientModule,
     CommonModule,
     RouterModule,
-    CookieModule.forRoot()
+    FlexLayoutModule,
+    CookieModule.forRoot(),
+    CarouselModule.forRoot(),
   ],
   exports: [
   HeaderComponent,
   FooterComponent,
 ],
+schemas: [ CUSTOM_ELEMENTS_SCHEMA],
   providers: [AuthService, ShoppingCartService, ProductService, HttpClientModule],
   bootstrap: [AppComponent]
 })

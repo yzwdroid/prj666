@@ -3,50 +3,31 @@
   src: url('https://fonts.googleapis.com/css?family=Montserrat'); /*URL to font*/
 }
 
-* {
-  margin: 0;
-  padding: 0;
-}
 
 header {
   background-color: white;
-  display: block;
   color:#67B0FF;
   font-family: 'Montserrat', sans-serif;
 
+
 }
 #img_logo {
-  margin: 15px 50px 0px 60px;
+
   float: left;
   width: 360px;
   height: 95px;
 
 }
-nav {
-  justify-self: end;
 
-position: absolute;
-width: 840px;
-height: 91px;
-left: 426px;
-top: 29px;
-}
 
-nav > ul > li {
-  display: inline-block;
-  padding: 16px 32px;
-}
-
-nav > ul > li > a {
-  font-size: 1.1rem;
+.navbar-brand > ul > li > a {
+  font-size: 1.5rem;
   color:#67B0FF;
   text-decoration: none;
   font-family: 'Montserrat', sans-serif;
 }
-#social-icon {
-  width: 10px;
-  height: 10px;
-}
+
+
 #shopping_cart{
   width: 43px;
 height: 34px;
