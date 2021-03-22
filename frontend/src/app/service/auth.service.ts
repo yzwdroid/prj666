@@ -8,23 +8,12 @@ import { map } from 'rxjs/operators';
 
 const BASEURL = environment.apiUrl;
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthService {
 
-  private userSubject: BehaviorSubject<Customer>;
-  public user: Observable<Customer>;
-
-  constructor(private router: Router,private http: HttpClient) {
-    this.userSubject = new BehaviorSubject<Customer>(JSON.parse(localStorage.getItem('user')));
-    this.user = this.userSubject.asObservable();
-  }
-
-  public get userValue(): Customer {
-    return this.userSubject.value;
-  }
+  constructor(private router: Router,private http: HttpClient) {}
 
   registerUser(body: any): Observable<any> {
-    //return this.http.post(`${BASEURL}/register`, body);
     return this.http.post(`${BASEURL}/customer/register`, body);
   }
 
@@ -34,7 +23,7 @@ export class AuthService {
           .pipe(map(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('user', JSON.stringify(user));
-            this.userSubject.next(user);
+
             return user;
         }));
   }
@@ -42,7 +31,6 @@ export class AuthService {
   logoutUser() {
     // remove user from local storage and set current user to null
     localStorage.removeItem('user');
-    this.userSubject.next(null);
     this.router.navigate(['sign-in'])
     .then(()=>{
       window.location.reload();
@@ -66,5 +54,19 @@ export class AuthService {
   getCustomers(): Observable<any> {
     return this.http.get(`${BASEURL}/customer`);
     //return this.http.get(`${BASEURL}`);
+  }
+
+  getCustomerById(id: any): Observable<any> {
+    return this.http.get(`${BASEURL}/customer/${id}`);
+  }
+
+  updateUser(id: any, user: any): Observable<any> {
+    return this.http.put(`${BASEURL}/customer/update/${id}`, user)
+    .pipe(map(u => {
+      //localStorage.removeItem('user');
+      localStorage.setItem('user', JSON.stringify(u));
+
+      return u;
+    }));
   }
 }

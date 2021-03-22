@@ -14,10 +14,10 @@
           <li class="list-group-item d-flex justify-content-between lh-sm" *ngFor="let product of products"
             [product]="product">
             <div>
-              <h6 class="my-0">{{product.product_name}}</h6>
+              <h6 class="my-0">{{product.product_name}} ({{product.product_quantity}})</h6>
               <small class="text-muted">{{product.product_description}}</small>
             </div>
-            <span class="text-muted">${{product.product_price}} x {{product.product_quantity}} =
+            <span class="text-muted">
               ${{(product.product_price
               * product.product_quantity).toFixed(2)}}</span>
           </li>

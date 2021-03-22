@@ -17,4 +17,14 @@ body:before {
 }
 body {
   font-family:"ABeeZee", Helvetica, sans-serif
+/* html, body {
+  margin-left: 15%;
+  margin-right: 15%;
+} */
+@media only screen and (max-width: 900px) {
+  html, body {
+  margin-left: 0;
+  margin-right: 0;
+    background-color: lightblue;
+  }
 }

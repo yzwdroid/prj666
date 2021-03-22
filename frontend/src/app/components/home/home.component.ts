@@ -16,10 +16,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getCustomers().subscribe(data => {
-      console.log(data);
       if (data.length > 0) {
         this.customers = data;
-        console.log(this.customers);
       }
     });
   }

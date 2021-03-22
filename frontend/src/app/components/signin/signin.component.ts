@@ -38,7 +38,6 @@ export class SigninComponent implements OnInit {
   }
 
   signinUser() {
-    console.log(this.SigninForm.value);
     this.authService.loginUser(this.SigninForm.value).subscribe(
       data => {
         this.SigninForm.reset();

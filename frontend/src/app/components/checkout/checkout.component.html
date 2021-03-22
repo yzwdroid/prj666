@@ -6,61 +6,49 @@
   <div class="row g-3">
     <div class="col-md-5 col-lg-4 order-md-last">
       <h4 class="d-flex justify-content-between align-items-center mb-3">
-        <span class="text-muted">Your cart</span>
-        <span class="badge bg-secondary rounded-pill">3</span>
+        <span class="text-muted">Summary</span>
+        <span class="badge bg-secondary rounded-pill">{{products.length}}</span>
       </h4>
       <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between lh-sm" *ngFor="let product of products"
+          [product]="product">
+          <div>
+            <h6 class="my-0">{{product.product_name}} ({{product.product_quantity}})</h6>
+            <small class="text-muted">{{product.product_description}}</small>
+          </div>
+          <span class="text-muted">
+            ${{(product.product_price
+            * product.product_quantity).toFixed(2)}}</span>
+        </li>
+        <!-- <li class="list-group-item d-flex justify-content-between lh-sm border-top">
+          <h6 class="text-muted">Promo</h6>
+          <strong>${{discount.toFixed(2)}}</strong>
+        </li> -->
         <li class="list-group-item d-flex justify-content-between lh-sm">
-          <div>
-            <h6 class="my-0">Product name</h6>
-            <small class="text-muted">Brief description</small>
-          </div>
-          <span class="text-muted">$12</span>
+          <h6 class="text-muted">Taxes</h6>
+          <strong>${{taxes.toFixed(2)}}</strong>
         </li>
-        <li class="list-group-item d-flex justify-content-between lh-sm">
-          <div>
-            <h6 class="my-0">Second product</h6>
-            <small class="text-muted">Brief description</small>
-          </div>
-          <span class="text-muted">$8</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between lh-sm">
-          <div>
-            <h6 class="my-0">Third item</h6>
-            <small class="text-muted">Brief description</small>
-          </div>
-          <span class="text-muted">$5</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between bg-light">
-          <div class="text-success">
-            <h6 class="my-0">Promo code</h6>
-            <small>EXAMPLECODE</small>
-          </div>
-          <span class="text-success">−$5</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between">
-          <div>
-            <h6 class="my-0">Total (CAD)</h6>
-            <small>Tax calculated at payment</small>
-          </div>
-          <strong>$20</strong>
+        <li class="list-group-item d-flex justify-content-between border-top">
+          <h6 class="my-0 mb-1">Total (CAD)</h6>
+          <strong>${{total.toFixed(2)}}</strong>
         </li>
       </ul>
 
-      <form class="card p-2">
+      <!-- <form class="card p-2">
         <div class="input-group">
           <input type="text" class="form-control" placeholder="Promo code">
           <button type="submit" class="btn btn-secondary">Redeem</button>
         </div>
-      </form>
+      </form> -->
     </div>
     <div class="col-md-7 col-lg-8">
-      <h4 class="mb-3">Billing address</h4>
-      <form class="needs-validation" novalidate>
+      <h4 class="mb-3">Shipping address</h4>
+      <form class="needs-validation" [formGroup]="checkoutForm" novalidate (ngSubmit)="onSubmit()">
         <div class="row g-3">
           <div class="col-sm-6">
             <label for="firstName" class="form-label">First name</label>
-            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+            <input type="text" class="form-control" id="firstName" formControlName="firstName" placeholder="" value=""
+              required>
             <div class="invalid-feedback">
               Valid first name is required.
             </div>
@@ -68,23 +56,25 @@
 
           <div class="col-sm-6">
             <label for="lastName" class="form-label">Last name</label>
-            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+            <input type="text" class="form-control" id="lastName" formControlName="lastName" placeholder="" value=""
+              required>
             <div class="invalid-feedback">
               Valid last name is required.
             </div>
           </div>
 
-          <div class="col-12">
+          <!-- <div class="col-12">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
             <div class="invalid-feedback">
               Please enter a valid email address for shipping updates.
             </div>
-          </div>
+          </div> -->
 
           <div class="col-12">
             <label for="address" class="form-label">Address</label>
-            <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+            <input type="text" class="form-control" id="address" formControlName="address" placeholder="1234 Main St"
+              required>
             <div class="invalid-feedback">
               Please enter your shipping address.
             </div>
@@ -92,14 +82,23 @@
 
           <div class="col-12">
             <label for="address2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
-            <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+            <input type="text" class="form-control" id="address2" formControlName="address2"
+              placeholder="Apartment or suite">
+          </div>
+
+          <div class="col-12">
+            <label for="city" class="form-label">City</label>
+            <input type="text" class="form-control" id="city" formControlName="city" placeholder="City" required>
+            <div class="invalid-feedback">
+              Please enter your city address.
+            </div>
           </div>
 
           <div class="col-md-5">
             <label for="country" class="form-label">Country</label>
-            <select class="form-select" id="country" required>
-              <option value="">Choose...</option>
-              <option selected>Canada</option>
+            <select class="form-select" id="country" formControlName="country" required>
+              <option value="" disabled="true">Choose...</option>
+              <option value="Canada" selected>Canada</option>
             </select>
             <div class="invalid-feedback">
               Please select a valid country.
@@ -108,21 +107,22 @@
 
           <div class="col-md-4">
             <label for="state" class="form-label">Province</label>
-            <select class="form-select" id="state" required>
-              <option value="">Choose...</option>
-              <option>Ontario</option>
-              <option>Quebec</option>
-              <option>Nova Scotia</option>
-              <option>New Brunswick</option>
-              <option>Manitoba</option>
-              <option>British Columbia</option>
-              <option>Prince Edward Island</option>
-              <option>Saskatchewan</option>
-              <option>Alberta</option>
-              <option>Newfoundland and Labrador</option>
-              <option>Northwest Territories</option>
-              <option>Yukon</option>
-              <option>Nunavut</option>
+            <select class="form-select" id="state" formControlName="state" required
+              (change)="changeTaxRate($event.target.value)">
+              <option value="choose" disabled="true" selected>Choose...</option>
+              <option value="ON">Ontario</option>
+              <option value="QC">Quebec</option>
+              <option value="NS">Nova Scotia</option>
+              <option value="NB">New Brunswick</option>
+              <option value="MB">Manitoba</option>
+              <option value="BC">British Columbia</option>
+              <option value="PE">Prince Edward Island</option>
+              <option value="SK">Saskatchewan</option>
+              <option value="AB">Alberta</option>
+              <option value="NL">Newfoundland and Labrador</option>
+              <option value="NT">Northwest Territories</option>
+              <option value="YT">Yukon</option>
+              <option value="NU">Nunavut</option>
             </select>
             <div class="invalid-feedback">
               Please provide a province state.
@@ -131,7 +131,7 @@
 
           <div class="col-md-3">
             <label for="zip" class="form-label">Postal Code</label>
-            <input type="text" class="form-control" id="zip" placeholder="" required>
+            <input type="text" class="form-control" id="zip" formControlName="zip" placeholder="" required>
             <div class="invalid-feedback">
               Zip code required.
             </div>
@@ -140,18 +140,18 @@
 
         <hr class="my-4">
 
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="same-address">
-          <label class="form-check-label" for="same-address">Shipping address is the same as my billing
+        <!-- <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="same_address" formControlName="same_address">
+          <label class="form-check-label" for="same_address">Shipping address is the same as my billing
             address</label>
-        </div>
+        </div> -->
 
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="save-info">
-          <label class="form-check-label" for="save-info">Save this information for next time</label>
-        </div>
+        <!-- <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="save_info" formControlName="save_info" checked>
+          <label class="form-check-label" for="save_info">Save this information for next time</label>
+        </div> -->
 
-        <hr class="my-4">
+        <!-- <hr class="my-4"> -->
 
         <h4 class="mb-3">Payment</h4>
 
@@ -207,9 +207,11 @@
             </div> -->
 
         <hr class="my-4">
-        <button class="w-100 btn btn-primary btn-lg" type="submit" (click)="validation()">Continue to payment</button>
+        <button class="w-100 btn btn-primary btn-lg" type="submit" *ngIf="!isPayPalEnable()" (click)="validation()">Continue to PayPal</button>
+        <ngx-paypal *ngIf="isPayPalEnable()" [config]="payPalConfig"></ngx-paypal>
       </form>
       <a routerLink="/shopping-cart">Back to shopping cart</a>
     </div>
   </div>
 </div>
+

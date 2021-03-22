@@ -15,6 +15,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { PaymentFinishComponent } from './components/payment-finish/payment-finish.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { PagingComponent } from './components/paging/paging.component';
 import { AuthService } from './service/auth.service';
@@ -26,6 +27,9 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import {FlexLayoutModule} from "@angular/flex-layout";
 //import { HomepageComponent } from './components/homepage/homepage.component';
+import { CheckoutService } from './service/checkout.service';
+import { NgxPayPalModule } from 'ngx-paypal';
+import { BannerComponent } from './components/banner/banner.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +47,8 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     ShoppingCartComponent,
     CheckoutComponent,
     HomepageComponent,
-
+    BannerComponent,
+    PaymentFinishComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,6 +68,10 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 ],
 schemas: [ CUSTOM_ELEMENTS_SCHEMA],
   providers: [AuthService, ShoppingCartService, ProductService, HttpClientModule],
+    NgxPayPalModule,
+    CookieModule.forRoot()
+  ],
+  providers: [AuthService, ShoppingCartService, ProductService, HttpClientModule, CheckoutService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

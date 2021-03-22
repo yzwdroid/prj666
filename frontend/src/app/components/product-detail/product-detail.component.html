@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <div class="row">
     <main class="product col-lg-8">
       <div class="container">
@@ -29,4 +29,58 @@
       </div>
     </main>
   </div>
-</div>
+</div> -->
+
+
+<div class="section">
+  <!-- container -->
+  <div class="container">
+    <!-- row -->
+    <div class="row d-flex">
+      <!-- Product main img -->
+      <div class="col-md-5 col-md-push-2">
+        <div id="product-main-img">
+            <div class="product-preview">
+              <img src="{{apiPicUrl}}/{{product.product_img}}" alt="">
+            </div>
+        </div>
+      </div>
+      <!-- /Product main img -->
+
+      <!-- Product details -->
+      <div class="col-md-5">
+        <div class="product-details">
+          <h2 class="product-name">{{product?.product_name}}</h2>
+          <div>
+            <h3 class="product-price">{{product?.product_price | currency:'USD'}} </h3>
+            <span class="product-available">In Stock</span>
+          </div>
+          <p>{{product?.product_description}}</p>
+
+
+          <div class="add-to-cart">
+            <div class="qty-label">
+              Qty
+              <div class="input-number">
+                <button class="qty-down" (click)="removeProduct(product)">-</button>
+                <!-- <input #quantity [max]="product?.product_quantity" [min]="product?.product_quantity >= 1 ? product?.product_quantity : 0"
+                       readonly type="number" value="{{product?.product_quantity >= 1 ? 1 : 0}}"> -->
+                <button class="qty-up" (click)="addProduct(product)">+</button>
+              </div>
+            </div>
+            <br/>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a [routerLink]="">
+                    <h3 class="h4"><button type="button" [disabled]="isInCart(product) > 0"
+                        class="fa fa-shopping-cart" (click)="addToCart(product)"><span
+                          *ngIf="isInCart(product) > 0"> {{isInCart(product)}} In Cart</span><span *ngIf="!isInCart(product)">Add To
+                          Cart</span></button></h3>
+                  </a>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Product details -->
+
