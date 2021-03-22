@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from "@angular/common";
@@ -23,6 +23,10 @@ import { ShoppingCartService } from './service/shoppingcart.service';
 import { ProductService } from './service/product.service';
 import { RouterModule } from '@angular/router';
 import { CookieModule } from 'ngx-cookie';
+import { HomepageComponent } from './components/homepage/homepage.component';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import {FlexLayoutModule} from "@angular/flex-layout";
+//import { HomepageComponent } from './components/homepage/homepage.component';
 import { CheckoutService } from './service/checkout.service';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { BannerComponent } from './components/banner/banner.component';
@@ -42,6 +46,7 @@ import { BannerComponent } from './components/banner/banner.component';
     PagingComponent,
     ShoppingCartComponent,
     CheckoutComponent,
+    HomepageComponent,
     BannerComponent,
     PaymentFinishComponent,
   ],
@@ -53,6 +58,16 @@ import { BannerComponent } from './components/banner/banner.component';
     HttpClientModule,
     CommonModule,
     RouterModule,
+    FlexLayoutModule,
+    CookieModule.forRoot(),
+    CarouselModule.forRoot(),
+  ],
+  exports: [
+  HeaderComponent,
+  FooterComponent,
+],
+schemas: [ CUSTOM_ELEMENTS_SCHEMA],
+  providers: [AuthService, ShoppingCartService, ProductService, HttpClientModule],
     NgxPayPalModule,
     CookieModule.forRoot()
   ],
