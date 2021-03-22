@@ -1,4 +1,4 @@
-const orderController = require("../controllers").order;
+const orderController = require("../controllers").orders;
 
 module.exports = (app) => {
   app.get("/api/order", orderController.findAll);

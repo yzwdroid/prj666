@@ -1,4 +1,4 @@
-const Order = require("../models").Order;
+const Orders = require("../models").Orders;
 const Address = require("../models").Address;
 const db = require("../models");
 const paypal = require("@paypal/checkout-server-sdk");
@@ -102,7 +102,7 @@ module.exports = {
       address_id = address.address_id;
     });
 
-    Order.create(order)
+    Orders.create(order)
       .then((order) => {
         products.forEach((product) => {
           db.sequelize.query(
@@ -152,7 +152,7 @@ module.exports = {
     //   });
   },
   async handleRequest(req, res) {
-    let results = await Order.findOne({
+    let results = await Orders.findOne({
       where: { order_id: req.params.id },
     }).then((order) => order.order_total_plus_tax);
 
@@ -185,14 +185,14 @@ module.exports = {
     });
   },
   findAll(req, res) {
-    return Order.findAll()
+    return Orders.findAll()
       .then((orders) => {
         res.status(201).send(orders);
       })
       .catch((error) => res.status(400).json({ message: "Error" }));
   },
   findOne(req, res) {
-    return Order.findOne({ where: { id: req.params.id } })
+    return Orders.findOne({ where: { id: req.params.id } })
       .then((order) => {
         if (!order) {
           res.status(201).send({ message: "No record found" });
@@ -202,7 +202,7 @@ module.exports = {
       .catch((error) => res.status(400).json({ message: "Error" }));
   },
   update(req, res) {
-    return Order.findOne({ where: { id: req.params.id } })
+    return Orders.findOne({ where: { id: req.params.id } })
       .then((order) => {
         if (!order) {
           res.status(201).send({ message: "No record found" });
@@ -216,7 +216,7 @@ module.exports = {
       .catch((error) => res.status(400).json({ message: "Error" }));
   },
   delete(req, res) {
-    return Order.destroy({ where: { id: req.params.id } })
+    return Orders.destroy({ where: { id: req.params.id } })
       .then(() => {
         res.status(200).json({ message: "order deleted successfully" });
       })

@@ -11,9 +11,10 @@ import { ShoppingCartService } from 'src/app/service/shoppingcart.service';
   styleUrls: ['./product-detail.component.css'],
 })
 export class ProductDetailComponent implements OnInit {
-  product = new Product();
+  product: Product;
   private querySub: any;
   apiPicUrl: string = environment.apiUrl + '/pictures';
+  product_quantity: number = 0;
 
   constructor(
     private data: ProductService,
@@ -22,9 +23,38 @@ export class ProductDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.shoppingCartService.shoppingCartList;
     this.querySub = this.route.params.subscribe((params) => {
-      this.data.getOne(params['id']).subscribe((data) => (this.product = data));
+      this.data.getOne(params['id']).subscribe((data) => {
+        this.product = data;
+      });
     });
+  }
+
+  removeProduct(product) {
+    this.product_quantity = this.product_quantity - 1;
+    this.updateQuantity(product, this.product_quantity);
+  }
+
+  addProduct(product) {
+    if (this.product_quantity === 0) {
+      this.shoppingCartService.addToCart(product);
+      return;
+    }
+    this.product_quantity = this.product_quantity + 1;
+    this.updateQuantity(product, this.product_quantity);
+  }
+
+  updateQuantity(product, quantity) {
+    if (quantity > 0) {
+      this.shoppingCartService.updateQuantity(product, quantity);
+    } else {
+      this.removeItem(product);
+    }
+  }
+
+  removeItem(product) {
+    this.shoppingCartService.removeFromCart(product);
   }
 
   addToCart(product) {
@@ -32,7 +62,8 @@ export class ProductDetailComponent implements OnInit {
   }
 
   isInCart(product) {
-    return this.shoppingCartService.isInCart(product);
+    this.product_quantity = this.shoppingCartService.isInCart(product);
+    return this.product_quantity;
   }
 
   ngOnDestroy() {

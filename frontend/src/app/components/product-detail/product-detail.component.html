@@ -62,19 +62,19 @@
             <div class="qty-label">
               Qty
               <div class="input-number">
-                <span class="qty-down">-</span>
-                <input #quantity [max]="product?.product_quantity" [min]="product?.product_quantity >= 1 ? product?.product_quantity : 0"
-                       readonly type="number" value="{{product?.product_quantity >= 1 ? 1 : 0}}">
-                <span class="qty-up">+</span>
+                <button class="qty-down" (click)="removeProduct(product)">-</button>
+                <!-- <input #quantity [max]="product?.product_quantity" [min]="product?.product_quantity >= 1 ? product?.product_quantity : 0"
+                       readonly type="number" value="{{product?.product_quantity >= 1 ? 1 : 0}}"> -->
+                <button class="qty-up" (click)="addProduct(product)">+</button>
               </div>
             </div>
             <br/>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <a [routerLink]="">
-                    <h3 class="h4"><button type="button" [disabled]="isInCart(product)"
+                    <h3 class="h4"><button type="button" [disabled]="isInCart(product) > 0"
                         class="fa fa-shopping-cart" (click)="addToCart(product)"><span
-                          *ngIf="isInCart(product)">in cart</span><span *ngIf="!isInCart(product)">Add To
+                          *ngIf="isInCart(product) > 0"> {{isInCart(product)}} In Cart</span><span *ngIf="!isInCart(product)">Add To
                           Cart</span></button></h3>
                   </a>
                 </div>
