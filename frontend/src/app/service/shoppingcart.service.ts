@@ -12,7 +12,7 @@ export class ShoppingCartService {
   constructor(private cookieService: CookieService) {
     let savedList = cookieService.getObject('shoppingcart') as Array<Product>;
     if (savedList) {
-      this.shoppingCartList = savedList
+      this.shoppingCartList = savedList;
     }
   }
 
@@ -23,9 +23,9 @@ export class ShoppingCartService {
       ({ product_id }) => product_id === product.product_id
     );
 
-    if (productExistInCart) return true;
+    if (productExistInCart) return productExistInCart.product_quantity;
 
-    return false;
+    return 0;
   }
 
   addToCart(product) {

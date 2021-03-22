@@ -6,12 +6,14 @@ const cors = require("cors");
 
 const app = express();
 app.use(cors());
-
+app.use(express.json());
 app.use(logger("dev"));
 app.use(bodyParser.json());
+app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 const models = require("./models");
+const { allowedNodeEnvironmentFlags } = require("process");
 
 models.sequelize
   .sync()

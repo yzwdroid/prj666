@@ -1,0 +1,34 @@
+<div class="container mb-4">
+  <div class="py-5 text-center">
+    <h2>Checkout form</h2>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-md-5 col-lg-4 order-md-last">
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Thank you, your order has been placed<br> Transaction # {{transaction_id}}</span>
+        <span class="badge bg-secondary rounded-pill">{{products.length}}</span>
+      </h4>
+      <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between lh-sm" *ngFor="let product of products"
+          [product]="product">
+          <div>
+            <h6 class="my-0">{{product.product_name}} ({{product.product_quantity}})</h6>
+            <small class="text-muted">{{product.product_description}}</small>
+          </div>
+          <span class="text-muted">
+            ${{(product.product_price
+            * product.product_quantity).toFixed(2)}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between lh-sm">
+          <h6 class="text-muted">Taxes</h6>
+          <strong>${{taxes.toFixed(2)}}</strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between border-top">
+          <h6 class="my-0 mb-1">Total (CAD)</h6>
+          <strong>${{total.toFixed(2)}}</strong>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 const Order_Detail = require("../models").Order_Detail;
-const Order = require("../models").Order;
+const Orders = require("../models").Orders;
 const db = require("../models");
 
 let constructor = (req) => {
@@ -27,7 +27,7 @@ module.exports = {
       .catch((error) => res.status(400).json({ message: "Error" }));
   },
   findOne(req, res) {
-    const queryOne = Order.findOne({
+    const queryOne = Orders.findOne({
       where: { order_id: req.params.id },
     });
 

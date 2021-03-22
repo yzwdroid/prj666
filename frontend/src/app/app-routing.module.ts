@@ -10,7 +10,10 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import { PaymentFinishComponent } from './components/payment-finish/payment-finish.component';
 import { AuthGuard } from './helper/auth.guard';
+
+const profileModule = () => import('./components/profile/profile.module').then(p => p.ProfileModule);
 
 const routes: Routes = [
   {
@@ -53,7 +56,7 @@ const routes: Routes = [
   {
     path: 'shopping-cart',
     component: ShoppingCartComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: 'checkout',
@@ -61,8 +64,18 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'payment-finish',
+    component: PaymentFinishComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'response-reset-password/:token',
     component: ResponseResetComponent,
+  },
+  {
+    path: 'profile',
+    loadChildren: profileModule,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',

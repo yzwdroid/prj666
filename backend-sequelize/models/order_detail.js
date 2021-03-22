@@ -25,6 +25,14 @@ module.exports = (sequelize, DataTypes) => {
           key: "order_id",
         },
       },
+      customer_id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV1,
+        referencess: {
+          model: "Customer",
+          key: "customer_id",
+        }
+      },
       shipment_id: {
         type: DataTypes.UUID,
         references: {
