@@ -9,7 +9,6 @@ import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { RequestResetComponent } from './components/request-reset/request-reset.component';
 import { ResponseResetComponent } from './components/response-reset/response-reset.component';
-import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
@@ -26,7 +25,6 @@ import { CookieModule } from 'ngx-cookie';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import {FlexLayoutModule} from "@angular/flex-layout";
-//import { HomepageComponent } from './components/homepage/homepage.component';
 import { CheckoutService } from './service/checkout.service';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { BannerComponent } from './components/banner/banner.component';
@@ -38,7 +36,6 @@ import { BannerComponent } from './components/banner/banner.component';
     SignupComponent,
     RequestResetComponent,
     ResponseResetComponent,
-    HomeComponent,
     HeaderComponent,
     FooterComponent,
     ProductListComponent,
@@ -59,6 +56,7 @@ import { BannerComponent } from './components/banner/banner.component';
     CommonModule,
     RouterModule,
     FlexLayoutModule,
+    NgxPayPalModule,
     CookieModule.forRoot(),
     CarouselModule.forRoot(),
   ],
@@ -67,10 +65,6 @@ import { BannerComponent } from './components/banner/banner.component';
   FooterComponent,
 ],
 schemas: [ CUSTOM_ELEMENTS_SCHEMA],
-  providers: [AuthService, ShoppingCartService, ProductService, HttpClientModule],
-    NgxPayPalModule,
-    CookieModule.forRoot()
-  ],
   providers: [AuthService, ShoppingCartService, ProductService, HttpClientModule, CheckoutService],
   bootstrap: [AppComponent]
 })

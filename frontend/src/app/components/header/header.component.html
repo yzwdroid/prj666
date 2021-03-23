@@ -1,123 +1,32 @@
-<!--header-->
+<header class="header">
+  <nav class="navbar navbar-expand-lg fixed-top py-3">
+    <div class="container"><a href="\"><img src="/assets/img/logo-01.png" class="img-responsive " id="img_logo"
+          alt="img_logo" /></a>
+      <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+        class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
 
-<header>
-  <nav class="navbar navbar-expand-lg ">
-    <a class="navbar-item">
-      <img src="/assets/img/logo-01.png" class="img-responsive " id="img_logo" alt="img_logo" />
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="navbar-brand">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link"href="/homepage">HOME</a></li>
-        <li class="nav-item active">
-          <a class="nav-link"href="/product-list">PRODUCTS</a></li>
-        <li class="nav-item active">
-          <a class="nav-link"href="/sign-in">LOGIN/SIGN UP </a></li>
-        <li class="nav-item active">
-          <a class="nav-link"href="/customer-dashboard">ACCOUNT</a></li>
-        <li class="nav-item active">
-          <a class="nav-link"href="/shopping-cart">
-            <img
-              src="/assets/img/shopping cart icon-01.png"
-              id="shopping_cart"
-              alt="shopping_cart"
-            />
-            <span class="badge bg-secondary rounded-pill">{{
-              shoppingCartTotal
-            }}</span></a
-          >
-        </li>
-      </ul>
-      <a class="navbar-item">
-            <!--  social media logo-->
-         <!--<div class="container social-links">
-          <div class="container social-icons-1">
-            <a
-              href="https://www.facebook.com"
-              target="_blank"
-              class="social-image social-icon-1-1"
-            >
-              <img
-                class="social-icon"
-                src="/assets/img/webicon-facebook.png"
-                alt="Social Icon"
-                style="width: 30px; height: 30px"
-            /></a>
-            <a
-              href="https://www.twitter.com"
-              target="_blank"
-              class="social-image social-icon-1-1"
-            >
-              <img
-                class="social-icon"
-                src="/assets/img/webicon-twitter.png"
-                alt="Social Icon"
-                style="width:30px;height:30px float:left margin:0"
-            /></a>
-            <a
-              href="https://www.google.com"
-              target="_blank"
-              class="social-image social-icon-1-1"
-            >
-              <img
-                class="googleplus-icon"
-                src="/assets/img/webicon-googleplus.png"
-                alt="Social Icon"
-                style="width: 30px; height: 30px"
-            /></a>
-            <a
-              href="https://www.linkedin.com"
-              target="_blank"
-              class="social-image social-icon-1-1"
-            >
-              <img
-                class="linkedin-icon"
-                src="/assets/img/webicon-linkedin.png"
-                alt="Social Icon"
-                style="width: 30px; height: 30px"
-            /></a>
-            <a
-              href="https://www.youtube.com"
-              target="_blank"
-              class="social-image social-icon-1-1"
-            >
-              <img
-                class="youtube-icon"
-                src="/assets/img/webicon-youtube.png"
-                alt="Social Icon"
-                style="width: 30px; height: 30px"
-            /></a>
-            <a
-              href="https://www.instagram.com"
-              target="_blank"
-              class="social-image social-icon-1-1"
-            >
-              <img
-                class="instagram-icon"
-                src="/assets/img/webicon-instagram.png"
-                alt="Social Icon"
-                style="width: 30px; height: 30px"
-            /></a>
-            contact us
-          </div>
-        </div>-->
-          <!--logo-->
-        <img src="/assets/img/ah-logo.png" id="img_logo" alt="logo" />
-        <nav>
-          <ul>
-            <li><a routerLink="/home">Home</a></li>
-            <li><a routerLink="/product-list">Products</a></li>
-            <li *ngIf="!isLogin()"><a routerLink="/sign-up">Create Account</a></li>
-            <li *ngIf="!isLogin()"><a routerLink="/sign-in">Login</a></li>
-            <li *ngIf="isLogin()"><a routerLink="/profile">Your Profile</a></li>
-            <li *ngIf="isLogin()"><a (click)="logout()">Logout</a></li>
-            <li><a routerLink="/shopping-cart">Shopping Cart <span class="badge bg-secondary rounded-pill">{{shoppingCartTotal}}</span></a></li>
-          </ul>
-        </nav>
+      <div id="navbarSupportedContent" class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a routerLink="/homepage" class="nav-link text-uppercase font-weight-bold">Home</a></li>
+          <li class="nav-item"><a routerLink="/product-list"
+              class="nav-link text-uppercase font-weight-bold">Products</a></li>
+          <li *ngIf="!isLogin()" class="nav-item"><a routerLink="/sign-up"
+              class="nav-link text-uppercase font-weight-bold">Sign Up</a></li>
+          <li *ngIf="!isLogin()" class="nav-item"><a routerLink="/sign-in"
+              class="nav-link text-uppercase font-weight-bold">Login</a></li>
+          <li *ngIf="isLogin()" class="nav-item"><a routerLink="/profile"
+              class="nav-link text-uppercase font-weight-bold">Your Profile</a></li>
+          <li *ngIf="isLogin()" class="nav-item"><a (click)="logout()"
+              class="nav-link text-uppercase font-weight-bold">Logout</a></li>
+          <li class="nav-item">
+            <a href="/shopping-cart" class="nav-link text-uppercase font-weight-bold">
+              <img src="/assets/img/shopping cart icon-01.png" id="shopping_cart" alt="shopping_cart" />
+              <span class="badge bg-secondary rounded-pill">{{shoppingCartTotal}}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
 </header>

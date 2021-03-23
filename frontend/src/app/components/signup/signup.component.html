@@ -1,55 +1,65 @@
 <div class=sign_in>
 
-<h4 class="heading">Create an account</h4>
-<h6 class="heading">   Having an account with us will allow you to check out faster in the future, store multiple addresses, view and track your orders in your account, and more.
-</h6>
 
-<div class="container-fluid form">
+  <div class="container-fluid form">
     <div class="row form-row ">
-        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-            <div class="card my-5">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Sign Up</h5>
-                    <div>
-                        <div id="errorMsg" *ngIf="errorMessage">
-                            <span>{{errorMessage}}</span>
-                        </div>
-                        <form action="" [formGroup]="SignupForm" (ngSubmit)="signupUser()">
-                            <div class="form-group form-signup">
-                                <input _ngcontent-c0="" class="form-control form-control-lg" placeholder="First Name"
-                                       type="text" id="firstName" formControlName="firstName" />
-                                <span *ngIf="!SignupForm.get('firstName').valid && SignupForm.get('firstName').touched"
-                                      class="help-block">Please enter a valid first name!</span>
-                            </div>
-                            <div class="form-group form-signup">
-                              <input _ngcontent-c0="" class="form-control form-control-lg" placeholder="Last Name"
-                                     type="text" id="lastName" formControlName="lastName" />
-                              <span *ngIf="!SignupForm.get('lastName').valid && SignupForm.get('lastName').touched"
-                                    class="help-block">Please enter a valid last name!</span>
-                          </div>
-                            <div class="form-group">
-                                <input _ngcontent-c0="" class="form-control form-control-lg" placeholder="E-mail" type="text"
-                                       id="email" formControlName="email" />
-                                <span *ngIf="!SignupForm.get('email').valid && SignupForm.get('email').touched" class="help-block">
-                                    Please
-                                    enter a valid email!
-                                </span>
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control form-control-lg" placeholder="Password" type="password"
-                                       formControlName="password" />
-                                <span *ngIf="!SignupForm.get('password').valid && SignupForm.get('password').touched"
-                                      class="help-block">Password is required and must have more than 4 characters!</span>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class=" btn btn-primary" (ngSubmit)="signupUser()">Sign Up</button>
-                                <a routerLink="../sign-in" class="btn btn-link">Have an account</a>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card my-5">
+          <div class="card-body">
+            <h1 class="heading">Create an account</h1>
+            <h6 class="heading"> Having an account with us will allow you to check out faster in the future, store
+              multiple
+              addresses, view and track your orders in your account, and more.
+            </h6>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+    <div class="row form-row ">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card my-5">
+          <div class="card-body">
+            <h2 class="card-title">Sign Up</h2><br>
+            <div>
+              <div id="errorMsg" *ngIf="errorMessage">
+                <span>{{errorMessage}}</span>
+              </div>
+              <form action="" [formGroup]="SignupForm" (ngSubmit)="signupUser()">
+                <div class="form-group form-signup">
+                  <input _ngcontent-c0="" class="form-control form-control-lg" placeholder="First Name" type="text"
+                    id="firstName" formControlName="firstName" />
+                  <span *ngIf="!SignupForm.get('firstName').valid && SignupForm.get('firstName').touched"
+                    class="help-block">Please enter a valid first name!</span>
+                </div>
+                <div class="form-group form-signup">
+                  <input _ngcontent-c0="" class="form-control form-control-lg" placeholder="Last Name" type="text"
+                    id="lastName" formControlName="lastName" />
+                  <span *ngIf="!SignupForm.get('lastName').valid && SignupForm.get('lastName').touched"
+                    class="help-block">Please enter a valid last name!</span>
+                </div>
+                <div class="form-group">
+                  <input _ngcontent-c0="" class="form-control form-control-lg" placeholder="E-mail" type="text"
+                    id="email" formControlName="email" />
+                  <span *ngIf="!SignupForm.get('email').valid && SignupForm.get('email').touched" class="help-block">
+                    Please
+                    enter a valid email!
+                  </span>
+                </div>
+                <div class="form-group">
+                  <input class="form-control form-control-lg" placeholder="Password" type="password"
+                    formControlName="password" />
+                  <span *ngIf="!SignupForm.get('password').valid && SignupForm.get('password').touched"
+                    class="help-block">Password is required and must have more than 4 characters!</span>
+                </div>
+                <div class="form-group">
+                  <button type="submit" class=" btn btn-primary" (ngSubmit)="signupUser()">Sign Up</button>
+                  <a routerLink="../sign-in" class="btn btn-link">Have an account</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

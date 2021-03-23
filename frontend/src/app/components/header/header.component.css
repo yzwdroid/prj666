@@ -1,39 +1,40 @@
-@font-face {
-  font-family: 'Montserrat'; /*a name to be used later*/
-  src: url('https://fonts.googleapis.com/css?family=Montserrat'); /*URL to font*/
+.text-small {
+  font-size: 1.2rem !important;
 }
 
-
-header {
-  background-color: white;
-  color:#67B0FF;
-  font-family: 'Montserrat', sans-serif;
-
-
+.font-weight-bold {
+  font-size: 2rem !important;
 }
+
+.header {
+  height: 115px;
+}
+
 #img_logo {
-
-  float: left;
-  width: 360px;
-  height: 95px;
-
+  max-width: 350px;
 }
 
-
-.navbar-brand > ul > li > a {
-  font-size: 1.5rem;
-  color:#67B0FF;
-  text-decoration: none;
-  font-family: 'Montserrat', sans-serif;
+.nav-link {
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
 }
 
-
-#shopping_cart{
-  width: 43px;
-height: 34px;
-}
-#badge bg-secondary rounded-pill{
-  width: 51px;
-  height: 41px;
+#shopping_cart {
+  max-width: 60px;
+  padding-right: 10px;
 }
 
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
+
+.navbar {
+  background-color: white;
+}
+
+body {
+  min-height: 110vh;
+  background-color: #4ca1af;
+  background-image: linear-gradient(135deg, #4ca1af 0%, #c4e0e5 100%);
+}
