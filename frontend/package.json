@@ -12,7 +12,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~11.2.0",
-    "@angular/cdk": "^11.2.5",
+    "@angular/cdk": "^11.2.6",
     "@angular/common": "~11.2.0",
     "@angular/compiler": "~11.2.0",
     "@angular/core": "~11.2.0",
@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~11.2.0",
     "@angular/platform-browser-dynamic": "~11.2.0",
     "@angular/router": "~11.2.0",
+    "@paypal/checkout-server-sdk": "^1.0.2",
     "@schematics/angular": "^9.1.8",
     "bootstrap": "4.1.1",
     "ngx-bootstrap": "^6.2.0",

@@ -15,23 +15,6 @@
     font-size: 3.5rem;
   }
 }
-<<<<<<< HEAD
-#product_banner{
-
-
-  max-width:100%;
-  height: auto;
-  float: left;
-  margin:  0,0,20px,0;
-}
-.col-3{
-  margin:  0,0,0,20px;
-  padding:  0,0,0,20px;
-}
-.product{
-  margin:  0,0,0,20px;
-  padding:  0,0,0,20px;
-=======
 
 .col-3 {
   margin: 0, 0, 0, 20px;
@@ -40,7 +23,6 @@
 .product {
   margin: 0, 0, 0, 20px;
   padding: 0, 0, 0, 20px;
->>>>>>> d9f48ac639268fc3183d02723f283c87691bc790
 }
 select option {
   margin: 40px;
@@ -48,8 +30,6 @@ select option {
   color: #fff;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
 }
-<<<<<<< HEAD
-=======
 
 .leftsidebar {
   padding: 36px;
@@ -60,4 +40,3 @@ select option {
   padding-top: 4px;
   background-color: #f8f9fa !important;
 }
->>>>>>> d9f48ac639268fc3183d02723f283c87691bc790
