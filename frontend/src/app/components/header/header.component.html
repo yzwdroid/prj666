@@ -1,5 +1,12 @@
-<!--header-->
+<header class="header">
+  <nav class="navbar navbar-expand-lg fixed-top py-3">
+    <div class="container"><a href="\"><img src="/assets/img/logo-01.png" class="img-responsive " id="img_logo"
+          alt="img_logo" /></a>
+      <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+        class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
 
+<<<<<<< HEAD
 <header>
   <nav class="navbar navbar-expand-lg ">
     <a class="navbar-item">
@@ -32,6 +39,29 @@
           >
         </li>
       </ul>
+=======
+      <div id="navbarSupportedContent" class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a routerLink="/homepage" class="nav-link text-uppercase font-weight-bold">Home</a></li>
+          <li class="nav-item"><a routerLink="/product-list"
+              class="nav-link text-uppercase font-weight-bold">Products</a></li>
+          <li *ngIf="!isLogin()" class="nav-item"><a routerLink="/sign-up"
+              class="nav-link text-uppercase font-weight-bold">Sign Up</a></li>
+          <li *ngIf="!isLogin()" class="nav-item"><a routerLink="/sign-in"
+              class="nav-link text-uppercase font-weight-bold">Login</a></li>
+          <li *ngIf="isLogin()" class="nav-item"><a routerLink="/profile"
+              class="nav-link text-uppercase font-weight-bold">Your Profile</a></li>
+          <li *ngIf="isLogin()" class="nav-item"><a (click)="logout()"
+              class="nav-link text-uppercase font-weight-bold">Logout</a></li>
+          <li class="nav-item">
+            <a href="/shopping-cart" class="nav-link text-uppercase font-weight-bold">
+              <img src="/assets/img/shopping cart icon-01.png" id="shopping_cart" alt="shopping_cart" />
+              <span class="badge bg-secondary rounded-pill">{{shoppingCartTotal}}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+>>>>>>> d9f48ac639268fc3183d02723f283c87691bc790
     </div>
   </nav>
 </header>

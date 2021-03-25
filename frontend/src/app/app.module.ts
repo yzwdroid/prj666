@@ -47,7 +47,6 @@ import { BannerComponent } from './components/banner/banner.component';
     ShoppingCartComponent,
     CheckoutComponent,
     HomepageComponent,
-
     BannerComponent,
     PaymentFinishComponent,
   ],
