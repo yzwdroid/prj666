@@ -1,30 +1,6 @@
 <div class="product-banner">
   <img src="/assets/img/product page banner-01.png" class="img-responsive" id="product_banner" alt="logo" />
 </div>
-<<<<<<< HEAD
-
-<div class="product">
-<div class="row">
-  <div class="col-3">
-    <div class="list-group">
-      <a
-        class="list-group-item list-group-item-action"
-        [class.active]="!category"
-        routerLink="/product-list"
-      >
-        All Categories
-      </a>
-      <a
-       *ngFor="let c of categories"
-       routerLink="/product-list"
-       [queryParams]="{ category: c }"
-       class="list-group-item list-group-item-action"
-       [class.active]="category === c"
-      >
-        {{ c }}
-      </a>
-=======
->>>>>>> d9f48ac639268fc3183d02723f283c87691bc790
 
 <div class="product">
   <div class="row">
@@ -98,5 +74,4 @@
       </div>
     </div>
   </div>
-</div>
 </div>
