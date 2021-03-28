@@ -28,6 +28,7 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import { CheckoutService } from './service/checkout.service';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { BannerComponent } from './components/banner/banner.component';
+import { AdminModule } from './components/admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { BannerComponent } from './components/banner/banner.component';
     RouterModule,
     FlexLayoutModule,
     NgxPayPalModule,
+    AdminModule,
     CookieModule.forRoot(),
     CarouselModule.forRoot(),
   ],
