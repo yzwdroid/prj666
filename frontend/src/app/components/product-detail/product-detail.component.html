@@ -35,10 +35,8 @@
 <div class="section">
   <!-- container -->
   <div class="container">
-    <!-- row -->
-    <div class="row d-flex">
       <!-- Product main img -->
-      <div class="col-md-5 col-md-push-2">
+      <div class="col-md-5">
         <div id="product-main-img">
             <div class="product-preview">
               <img src="{{apiPicUrl}}/{{product.product_img}}" alt="">
@@ -62,10 +60,11 @@
             <div class="qty-label">
               Qty
               <div class="input-number">
-                <button class="qty-down" (click)="removeProduct(product)">-</button>
+                <button class="btn btn-danger btn-xs minus" (click)="removeProduct(product)"><i class="glyphicon glyphicon-minus"></i></button>
+                {{product.product_quantity || 1}}
+                <button class="btn btn-success btn-xs plus" (click)="addProduct(product)"><i class="glyphicon glyphicon-plus"></i></button>
                 <!-- <input #quantity [max]="product?.product_quantity" [min]="product?.product_quantity >= 1 ? product?.product_quantity : 0"
                        readonly type="number" value="{{product?.product_quantity >= 1 ? 1 : 0}}"> -->
-                <button class="qty-up" (click)="addProduct(product)">+</button>
               </div>
             </div>
             <br/>
