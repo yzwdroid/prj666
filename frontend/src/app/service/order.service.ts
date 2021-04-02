@@ -28,4 +28,8 @@ export class OrderService {
 
     return this.http.get(`${BASEURL}/order`, { params });
   }
+
+  public getOrderDetail(id): Observable<any> {
+    return this.http.get(`${BASEURL}/order_detail/${id}`);
+  }
 }

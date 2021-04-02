@@ -1,0 +1,26 @@
+<div class="container">
+  <h1>Order detail Information</h1>
+  <div class="container row">
+    <div   class="col-md-6">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Product ID</th>
+        <th>Product Quantity</th>
+
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of items" [item]="item">
+        <td>{{item.product_id}}</td>
+        <td>{{item.quantity}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div   class="col-md-6">
+    </div>
+
+  </div>
+

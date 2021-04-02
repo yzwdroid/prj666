@@ -11,12 +11,10 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { PaymentFinishComponent } from './components/payment-finish/payment-finish.component';
 import { AuthGuard } from './helper/auth.guard';
-import { AdminComponent } from './components/admin/admin/admin.component';
-import { ManageUsersComponent } from './components/admin/manage-users/manage-users.component';
-import { ManageOrdersComponent } from './components/admin/manage-Orders/manage-Orders.component';
-import { ManageProductsComponent } from './components/admin/manage-products/manage-products.component';
+
 
 const profileModule = () => import('./components/profile/profile.module').then(p => p.ProfileModule);
+const adminModule = () => import('./components/admin/admin.module').then(x => x.AdminModule);
 
 const routes: Routes = [
   {
@@ -77,19 +75,8 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component: AdminComponent,
-  },
-  {
-    path: 'admin/users',
-    component: ManageUsersComponent,
-  },
-  {
-    path: 'admin/orders',
-    component: ManageOrdersComponent,
-  },
-  {
-    path: 'admin/products',
-    component: ManageProductsComponent,
+    loadChildren: adminModule,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',
