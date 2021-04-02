@@ -1,1 +1,37 @@
-<p>manage-orders works!</p>
+<div class="container">
+  <h1>Order Information</h1>
+  <!--<a (click)="addUser()" class="btn btn-primary mb-3">add</a>-->
+  <div class="container row">
+    <div   class="col-md-6">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Order Number</th>
+        <th>Order Status</th>
+        <th>Order Total Price</th>
+        <th>Order Date</th>
+
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let order of orders" [order]="order">
+        <td>{{order.order_number}}</td>
+        <td>{{order.order_status}}</td>
+        <td>{{order.order_total_plus_tax}}</td>
+        <td>{{order.order_date}}</td>
+
+         <!-- <button type="button" (click)="onDelete()" [disabled]="deleting" class="btn btn-danger">
+            <span *ngIf="deleting" class="spinner-border spinner-border-sm mr-1"></span>
+            Delete
+        </button> -->
+        <td><button type="button" class="btn btn-primary"><a routerLink="">Detail</a></button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div   class="col-md-6">
+    </div>
+
+  </div>
+

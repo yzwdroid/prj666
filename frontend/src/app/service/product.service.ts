@@ -10,7 +10,7 @@ export class ProductService {
   constructor(private http: HttpClient) {}
 
   public getAll(): Observable<any> {
-    return this.http.get(`${BASEURL}/product`);
+    return this.http.get(`${BASEURL}/products`);
   }
 
   public getOne(id): Observable<any> {
