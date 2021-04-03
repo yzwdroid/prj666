@@ -33,4 +33,8 @@ export class ProductService {
 
     return this.http.get(`${BASEURL}/product`, { params });
   }
+
+  create(body: any): Observable<any> {
+    return this.http.post(`${BASEURL}/product`, body);
+  }
 }
