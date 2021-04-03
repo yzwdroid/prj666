@@ -27,7 +27,7 @@
               Qty
               <div class="input-number">
                 <button class="btn btn-danger btn-xs minus" (click)="removeProduct(product)"><i class="glyphicon glyphicon-minus"></i></button>
-                <input class="form-contrl m-2" [(ngModel)]="product_quantity" />
+                <input class="form-contrl m-2" [(ngModel)]="product_quantity" style="width:20px"/>
                 <button class="btn btn-success btn-xs plus" (click)="addProduct(product)"><i class="glyphicon glyphicon-plus"></i></button>
               </div>
             </div>
@@ -48,9 +48,9 @@
       <!-- /Product details -->
   </div>
 </div>
-<hr style="height:5px">
+<hr style="height:4px">
 <div>
-  <h3>{{product.product_description}}</h3>
+  <h3 class="center">{{product.product_description}}</h3>
   <img src="{{apiPicUrl}}/{{product.product_img}}" alt="" class="center">
 </div>
 
