@@ -4,10 +4,6 @@
  * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-full-width-pics/blob/master/LICENSE)
  */
 
- *, html  {
-  margin: 0;
-  padding: 0;
-}
 
  @font-face {
   font-family: 'Montserrat'; /*a name to be used later*/
@@ -26,10 +22,21 @@
   background-size: cover;
   -o-background-size: cover;
 }
-#header_banner{
+/*#header_banner{
 
   width: 1440px;
   height: 421px;
   float: left;
   margin:  0,0,20px,0;
+}*/
+.container{
+
+  grid-gap: 1rem;
+  padding:  20px,20px,20px,20px;
+  margin:  20px,20px,20px,20px;
 }
+
+
+
+
+
