@@ -7,7 +7,6 @@ let storage = multer.diskStorage({
     cb(null, __basedir + '/public/pictures/');
   },
   filename: (req, file, cb) => {
-    console.log("sadfasdf" + file.originalname);
     cb(null, file.originalname);
   },
 });

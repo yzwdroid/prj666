@@ -6,8 +6,6 @@ module.exports = {
     try {
       await uploadFile(req, res);
     } catch (err) {
-      console.log("IS THERE AN ERROR??" + err);
-
       if (err.code == "LIMIT_FILE_SIZE") {
         return res.status(500).send({
           message: "File size cannot be larger than 2MB!",
