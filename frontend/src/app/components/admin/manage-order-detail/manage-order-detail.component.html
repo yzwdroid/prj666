@@ -14,7 +14,13 @@
         </tr>
         <tr>
           <td>Order Status</td>
-          <td>{{order_details.order_status}}</td>
+          <td>
+            <select (change)="changeOrderStatus(order_details.order_id, $event.target.value)">
+              <option *ngFor="let status of order_status" value="{{status}}"
+                [selected]="status.toLowerCase().localeCompare(order_details.order_status.toLowerCase()) === 0">
+                {{status}}</option>
+            </select>
+          </td>
         </tr>
         <tr>
           <td>Order Total</td>

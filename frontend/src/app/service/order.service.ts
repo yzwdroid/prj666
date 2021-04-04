@@ -6,11 +6,10 @@ import { environment } from './../../environments//environment';
 const BASEURL = environment.apiUrl;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrderService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public getAll(): Observable<any> {
     return this.http.get(`${BASEURL}/order`);
@@ -31,5 +30,11 @@ export class OrderService {
 
   public getOrderDetail(id): Observable<any> {
     return this.http.get(`${BASEURL}/order_detail/${id}`);
+  }
+
+  public changeOrderStatus(id, value): Observable<any> {
+    return this.http.post(`${BASEURL}/order/status/${id}`, {
+      order_status: value,
+    });
   }
 }

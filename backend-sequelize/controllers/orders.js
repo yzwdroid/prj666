@@ -96,7 +96,7 @@ module.exports = {
 
     const order = {
       order_date: Date.now(),
-      order_status: "placed",
+      order_status: "Placed",
       order_shipping_address_id: address_id,
       order_total_plus_tax: validated_server_total,
       tax_rate: sales_tax_rate_canada[state].sales_tax,
@@ -175,9 +175,7 @@ module.exports = {
   },
   findAll(req, res) {
     return Orders.findAll({
-      order: [
-        ["order_date", "DESC"]
-      ],
+      order: [["order_date", "DESC"]],
     })
       .then((orders) => {
         res.status(201).send(orders);
@@ -207,6 +205,20 @@ module.exports = {
           .catch((error) => res.status(400).json({ message: "Error" }));
       })
       .catch((error) => res.status(400).json({ message: "Error" }));
+  },
+  updateStatus(req, res) {
+    console.log(req);
+    return Orders.findOne({ where: { order_id: req.params.id } })
+      .then((order) => {
+        if (!order) {
+          res.status(201).send({ message: "No record found" });
+        }
+        order
+          .update({ order_status: req.body.order_status })
+          .then((update) => res.status(201).send(update))
+          .catch((error) => res.status(400).json({ message: error }));
+      })
+      .catch((error) => res.status(400).json({ message: error }));
   },
   delete(req, res) {
     return Orders.destroy({ where: { id: req.params.id } })
