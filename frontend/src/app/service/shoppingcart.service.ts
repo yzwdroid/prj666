@@ -64,6 +64,16 @@ export class ShoppingCartService {
     );
   }
 
+  emptyCart() {
+    this.shoppingCartList = [];
+    this.cookieService.putObject(
+      'shoppingcart',
+      this.shoppingCartList,
+      this.cookieOptions
+    );
+    this.shoppingCartListChange.next(this.shoppingCartList.length);
+  }
+
   updateQuantity(product, quantity) {
     const productExistInCart = this.shoppingCartList.find(
       ({ product_id }) => product_id === product.product_id

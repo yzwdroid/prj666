@@ -6,5 +6,6 @@ module.exports = (app) => {
   app.get("/api/paypal/:id", orderController.handleRequest);
   app.post("/api/order", orderController.create);
   app.post("/api/order/:id", orderController.update);
+  app.post("/api/order/status/:id", orderController.updateStatus);
   app.delete("/api/order/:id", orderController.delete);
 };

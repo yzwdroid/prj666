@@ -13,18 +13,38 @@ export class ManageOrderDetailComponent implements OnInit {
   order_details: any;
   products: Array<Product> = [];
   product: Product;
-  apiPicUrl: string = environment.apiUrl + "/pictures";
+  apiPicUrl: string = environment.apiUrl + '/pictures';
+  order_status: Array<string> = [
+    'Placed',
+    'Production',
+    'Packing',
+    'Shipped',
+    'Complete',
+    'Cancelled',
+  ];
 
-  constructor(private orderService: OrderService, private route: ActivatedRoute) {}
+  constructor(
+    private orderService: OrderService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.orderService.getOrderDetail(params['id']).subscribe((data) => {
         console.log(data);
         this.order_details = data;
-        this.products = data.products
+        this.products = data.products;
         console.log(this.products);
       });
     });
+  }
+
+  changeOrderStatus(order_id, value) {
+    this.orderService.changeOrderStatus(order_id, value).subscribe(
+      (data) => {},
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }

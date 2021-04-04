@@ -13,7 +13,7 @@ import { PaymentFinishComponent } from './components/payment-finish/payment-fini
 import { AuthGuard } from './helper/auth.guard';
 import { AdminComponent } from './components/admin/admin/admin.component';
 import { ManageUsersComponent } from './components/admin/manage-users/manage-users.component';
-import { ManageOrdersComponent } from './components/admin/manage-Orders/manage-Orders.component';
+import { ManageOrdersComponent } from './components/admin/manage-orders/manage-orders.component';
 import { ManageProductsComponent } from './components/admin/manage-products/manage-products.component';
 
 

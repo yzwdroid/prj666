@@ -215,6 +215,7 @@ export class CheckoutComponent implements OnInit {
       },
       onClientAuthorization: (data) => {
         this.showSuccess = true;
+        this.shoppingCartService.emptyCart(); // empty the shopping cart.
         this.router.navigate(['payment-finish'], { state: { id: data.id } });
       },
       onCancel: (data, actions) => {
