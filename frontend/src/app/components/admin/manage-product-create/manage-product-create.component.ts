@@ -15,6 +15,10 @@ export class ManageProductCreateComponent implements OnInit {
   loading = false;
   submitted = false;
   deleting = false;
+  categories: string[] = ["Books", "Business Cards", "Calendars", "Carbonless Forms", "Copy & Prints",
+"Door Hangers", "Envelopes", "Flyers & Brochures", "Feature Sheets", "Letterheads",
+"Notepads", "Postcards", "Pocket Folders", "Tickets", "Magnets", "Posters",
+"Real Estate Signs", "Banner & Displays", "Window Graphics", "Sign Accessories"];
 
   constructor(
     private fb: FormBuilder,
@@ -31,7 +35,7 @@ export class ManageProductCreateComponent implements OnInit {
     this.productForm = this.fb.group({
       product_img: [null, [Validators.required]],
       product_name: [null, [Validators.required]],
-      emaproduct_priceil: [null, [Validators.required]],
+      product_price: [null, [Validators.required]],
       product_description: [null, [Validators.required]],
       product_quantity: [null, [Validators.required]],
       category: [null, [Validators.required]],
@@ -48,7 +52,7 @@ export class ManageProductCreateComponent implements OnInit {
     if (this.productForm.invalid) {
         return;
     }
-
+    console.log(this.productForm.value);
     this.loading = true;
     this.productService.create(this.productForm.value)
         .pipe(first())

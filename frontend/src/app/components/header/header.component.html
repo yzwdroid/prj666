@@ -14,7 +14,7 @@
           <a class="nav-link"href="/homepage">HOME</a></li>
         <li class="nav-item active">
           <a class="nav-link"href="/product-list">PRODUCTS</a></li>
-        <li class="nav-item active">
+        <li *ngIf="!isLogin()" class="nav-item active">
           <a class="nav-link"href="/sign-in">LOGIN/SIGN UP </a></li>
         <li *ngIf="isLogin()&&!isAdmin()" class="nav-item active">
           <a class="nav-link"href="/profile">ACCOUNT</a></li>

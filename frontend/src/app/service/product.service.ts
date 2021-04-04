@@ -35,6 +35,7 @@ export class ProductService {
   }
 
   create(body: any): Observable<any> {
+    console.log(body);
     return this.http.post(`${BASEURL}/product`, body);
   }
 }
