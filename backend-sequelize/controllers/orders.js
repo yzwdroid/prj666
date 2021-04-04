@@ -174,7 +174,11 @@ module.exports = {
     });
   },
   findAll(req, res) {
-    return Orders.findAll()
+    return Orders.findAll({
+      order: [
+        ["order_date", "DESC"]
+      ],
+    })
       .then((orders) => {
         res.status(201).send(orders);
       })
