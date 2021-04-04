@@ -13,7 +13,9 @@ export class HeaderComponent implements OnInit {
   public shoppingCartTotal: string;
   customer: Customer
   constructor(private authService: AuthService, private shoppingCartService: ShoppingCartService) {
-    this.customer = JSON.parse(localStorage.getItem("user"));
+    if(localStorage.getItem("user")){
+      this.customer = JSON.parse(localStorage.getItem("user")).user;
+    }
   }
 
   ngOnInit(): void {
@@ -31,5 +33,14 @@ export class HeaderComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  isAdmin(){
+    if(this.customer){
+      if(this.customer.email === "admin@example.com"){
+        return true;
+      }
+      return false;
+    }
   }
 }
