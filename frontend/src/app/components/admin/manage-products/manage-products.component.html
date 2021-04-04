@@ -1,27 +1,35 @@
 <div class="container">
   <h1>Product Information</h1>
-  <!--<a (click)="addUser()" class="btn btn-primary mb-3">add</a>-->
+  <a routerLink="/admin/product-create"><button type="button" class="btn btn-primary">Create a product</button></a>
   <div class="container row">
     <div   class="col-md-6">
     <table class="table">
       <thead>
       <tr>
+        <th>Product Image</th>
         <th>Product Name</th>
-        <th>Category</th>
+        <th>Product Price</th>
+        <th>Product Category</th>
 
         <th></th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let product of products" [product]="product">
+        <td>
+          <img *ngIf="product.product_img != null; else renderPlaceholderImg"
+          src="{{apiPicUrl}}/{{product.product_img}}" class="img-fluid" height="100" width="130">
+        </td>
         <td>{{product.product_name}}</td>
-        <td>{{product.product_detail}}</td>
+        <td>{{product.product_price}}</td>
+        <td>{{product.category}}</td>
 
          <!-- <button type="button" (click)="onDelete()" [disabled]="deleting" class="btn btn-danger">
             <span *ngIf="deleting" class="spinner-border spinner-border-sm mr-1"></span>
             Delete
         </button> -->
-        <td><button (click)="deleteProduct(user.email)" type="button" class="btn btn-primary">Delete Product</button></td>
+        <td><a routerLink=""><button type="button" class="btn btn-primary">Update</button></a></td>
+        <td><button (click)="deleteProduct(user.email)" type="button" class="btn btn-primary">Delete</button></td>
       </tr>
       </tbody>
     </table>

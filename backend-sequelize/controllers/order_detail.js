@@ -27,12 +27,8 @@ module.exports = {
       .catch((error) => res.status(400).json({ message: "Error" }));
   },
   findOne(req, res) {
-    const queryOne = Orders.findOne({
-      where: { order_id: req.params.id },
-    });
-
-    const queryTwo = db.sequelize.query(
-      `SELECT product_name, quantity, product_price
+    const queryOne = db.sequelize.query(
+      `SELECT *
       FROM Order_Detail
       JOIN Product ON Order_Detail.product_id = Product.product_id
       WHERE order_id = ?`,
@@ -41,37 +37,53 @@ module.exports = {
       }
     );
 
+    const queryTwo = db.sequelize.query(
+      `SELECT *
+      FROM Order_Detail
+      JOIN Product ON Order_Detail.product_id = Product.product_id
+      JOIN Orders ON Order_Detail.order_id = Orders.order_id
+      JOIN Address ON Orders.order_shipping_address_id = Address.address_id
+      JOIN Customer ON Orders.customer_id = Customer.customer_id
+      WHERE Orders.order_id = ?`,
+      {
+        replacements: [req.params.id],
+      }
+    );
+
     return Promise.all([queryOne, queryTwo])
       .then((responses) => {
+        // Note: this response returns a nested array of arrays of arrays 
         product_array = [];
-        responses[1][0].forEach((item) => {
+        responses[0][0].forEach((item) => {
           product_array.push({
             product_name: item.product_name,
             product_quantity: item.quantity,
             product_price: item.product_price,
+            product_img: item.product_img,
+            product_description: item.product_description,
           });
         });
-        orders = {
-          order_id: responses[0].order_id,
-          order_date: responses[0].order_date,
-          order_status: responses[0].order_status,
-          order_number: responses[0].order_number,
-          order_shipping_address_id: responses[0].order_shipping_address_id,
+        const order_detail = {
+          first_name: responses[1][0][0].first_name,
+          last_name: responses[1][0][0].last_name,
+          email: responses[1][0][0].email,
+          order_id: responses[1][0][0].order_id,
+          order_date: responses[1][0][0].order_date,
+          order_status: responses[1][0][0].order_status,
+          transaction_id: responses[1][0][0].transaction_id,
+          order_total_plus_tax: responses[1][0][0].order_total_plus_tax,
+          tax_rate: responses[1][0][0].tax_rate,
+          address_line_1: responses[1][0][0].address_line_1,
+          address_line_2: responses[1][0][0].address_line_2,
+          city: responses[1][0][0].city,
+          province: responses[1][0][0].province,
+          postal_code: responses[1][0][0].postal_code,
           products: product_array,
         };
 
-        res.status(201).send(orders);
+        res.status(201).send(order_detail);
       })
       .catch((error) => console.log(error));
-
-    // return Order_Detail.findOne({ where: { order_detail_id: req.params.id } })
-    //   .then((order) => {
-    //     if (!order) {
-    //       res.status(201).send({ message: "No record found" });
-    //     }
-    //     res.status(201).send(order);
-    //   })
-    //   .catch((error) => res.status(400).json({ message: error }));
   },
   update(req, res) {
     return Order_Detail.findOne({ where: { order_detail_id: req.params.id } })

@@ -16,7 +16,7 @@
           <a class="nav-link"href="/product-list">PRODUCTS</a></li>
         <li class="nav-item active">
           <a class="nav-link"href="/sign-in">LOGIN/SIGN UP </a></li>
-        <li class="nav-item active">
+        <li *ngIf="isLogin()" class="nav-item active">
           <a class="nav-link"href="/profile">ACCOUNT</a></li>
         <li class="nav-item active">
           <a class="nav-link"href="/shopping-cart">
@@ -30,6 +30,8 @@
             }}</span></a
           >
         </li>
+        <li *ngIf="isLogin()" class="nav-item active">
+          <a (click)="logout()" class="nav-link"href="/profile">LOGOUT</a></li>
       </ul>
     </div>
   </nav>
