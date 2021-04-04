@@ -10,6 +10,7 @@ import { ManageProductsComponent } from './manage-products/manage-products.compo
 import { AdminRoutingModule } from './admin-routing.module';
 import { ManageOrderDetailComponent } from './manage-order-detail/manage-order-detail.component';
 import { ManageProductCreateComponent } from './manage-product-create/manage-product-create.component';
+import { ManageProductUpdateComponent } from './manage-product-update/manage-product-update.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { ManageProductCreateComponent } from './manage-product-create/manage-pro
     ManageOrdersComponent,
     ManageProductsComponent,
     ManageOrderDetailComponent,
-    ManageProductCreateComponent
+    ManageProductCreateComponent,
+    ManageProductUpdateComponent
   ],
   imports: [
     CommonModule,

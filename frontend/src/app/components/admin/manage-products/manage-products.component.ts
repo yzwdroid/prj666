@@ -13,7 +13,6 @@ import { environment } from '../../../../environments/environment';
 export class ManageProductsComponent  implements OnInit {
   products: Array<Product> = [];
   apiPicUrl: string = environment.apiUrl + "/pictures";
-  loading: boolean = true;
 
 
   constructor(
@@ -22,17 +21,12 @@ export class ManageProductsComponent  implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.data.getAll().subscribe(data=>this.products = data);
-    if(this.products){
-      console.log("Products are found!");
-    }else{
-      console.log("No Products!");
-    }
+    this.data.getAll().subscribe(data=>{
+      this.products = data;
+      console.log(this.products);
+    });
   }
 
-  onLoad() {
-    this.loading = false;
-  }
 }
 
 

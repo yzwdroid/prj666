@@ -24,11 +24,7 @@
         <td>{{product.product_price}}</td>
         <td>{{product.category}}</td>
 
-         <!-- <button type="button" (click)="onDelete()" [disabled]="deleting" class="btn btn-danger">
-            <span *ngIf="deleting" class="spinner-border spinner-border-sm mr-1"></span>
-            Delete
-        </button> -->
-        <td><a routerLink=""><button type="button" class="btn btn-primary">Update</button></a></td>
+        <td><a [routerLink]="['/admin/product-update', product.product_id]"><button type="button" class="btn btn-primary">Update</button></a></td>
         <td><button (click)="deleteProduct(user.email)" type="button" class="btn btn-primary">Delete</button></td>
       </tr>
       </tbody>

@@ -7,6 +7,7 @@ import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
 import { ManageOrderDetailComponent } from './manage-order-detail/manage-order-detail.component';
 import { ManageProductsComponent } from './manage-products/manage-products.component';
 import { ManageProductCreateComponent } from './manage-product-create/manage-product-create.component';
+import { ManageProductUpdateComponent } from './manage-product-update/manage-product-update.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
         { path: 'order-detail/:id', component: ManageOrderDetailComponent },
         { path: 'products', component: ManageProductsComponent },
         { path: 'product-create', component: ManageProductCreateComponent },
+        { path: 'product-update/:id', component: ManageProductUpdateComponent },
     ]
   }
 ];
