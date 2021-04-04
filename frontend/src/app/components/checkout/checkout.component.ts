@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Product } from 'src/app/model/Product';
+import { Address } from 'src/app/model/Address';
+import { AuthService } from '../../service/auth.service';
+import { AddressService } from '../../service/address.service';
 import { ShoppingCartService } from 'src/app/service/shoppingcart.service';
 import { CheckoutService } from 'src/app/service/checkout.service';
-import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
+import { IPayPalConfig } from 'ngx-paypal';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { Customer } from 'src/app/model/Customer';
+
 const BASEURL = environment.apiUrl;
 
 interface ProvinceSalesTax {
@@ -24,6 +29,8 @@ export class CheckoutComponent implements OnInit {
   discount: number;
   taxes: number;
   order_id: string;
+  customer: Customer;
+  address: Address;
   checkoutForm = new FormGroup({
     firstName: new FormControl(null, [Validators.required]),
     lastName: new FormControl(),
@@ -60,6 +67,8 @@ export class CheckoutComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private authService: AuthService,
+    private addressService: AddressService,
     private shoppingCartService: ShoppingCartService,
     private checkoutService: CheckoutService
   ) {}
@@ -70,6 +79,36 @@ export class CheckoutComponent implements OnInit {
     this.taxes = 0.0;
     this.discount = 0.0;
     this.initConfig();
+
+    var id = JSON.parse(localStorage.getItem('user')).user.customer_id;
+    this.authService.getCustomerById(id).subscribe((data) => {
+      if (data) {
+        this.customer = data;
+        console.log(data);
+
+        this.addressService
+          .getOne(this.customer.shipping_address_id)
+          .subscribe((data: Address) => {
+            this.address = data;
+            if (data) {
+              console.log(data);
+              this.checkoutForm.patchValue({
+                address: this.address.address_line_1,
+                address2: this.address.address_line_2,
+                city: this.address.city,
+                state: this.address.province,
+                zip: this.address.postal_code,
+              });
+              this.changeTaxRate(this.address.province);
+            }
+          });
+
+        this.checkoutForm.patchValue({
+          firstName: this.customer.first_name,
+          lastName: this.customer.last_name,
+        });
+      }
+    });
   }
 
   changeTaxRate(province) {
@@ -98,6 +137,8 @@ export class CheckoutComponent implements OnInit {
       total: this.total,
       taxes: this.taxes,
       products: this.shoppingCartService.shoppingCartList,
+      customer_id: this.customer.customer_id,
+      address_id: this.address.address_id,
     };
 
     const json = JSON.stringify(obj);

@@ -15,6 +15,7 @@ const model = (sequelize, DataTypes) => {
       transaction_id: DataTypes.STRING,
       tax_rate: DataTypes.DOUBLE,
       order_total_plus_tax: DataTypes.DOUBLE,
+      customer_id: DataTypes.UUID,
     },
     {
       indexes: [
