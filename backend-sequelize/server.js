@@ -10,10 +10,11 @@ app.use(express.json());
 app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.text());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 const models = require("./models");
 const { allowedNodeEnvironmentFlags } = require("process");
+global.__basedir = __dirname;
 
 models.sequelize
   .sync()
