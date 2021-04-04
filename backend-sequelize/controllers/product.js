@@ -1,12 +1,33 @@
 const Product = require("../models").Product;
-
-let constructor = (req) => {
-  return {};
-};
+const uploadFile = require("../middleware/upload");
 
 module.exports = {
-  create(req, res) {
-    return Product.create(constructor(req))
+  async create(req, res) {
+    try {
+      await uploadFile(req, res);
+    } catch (err) {
+      console.log("IS THERE AN ERROR??" + err);
+
+      if (err.code == "LIMIT_FILE_SIZE") {
+        return res.status(500).send({
+          message: "File size cannot be larger than 2MB!",
+        });
+      }
+
+      res.status(500).send({
+        message: `Could not upload the file: ${req.file.originalname}. ${err}`,
+      });
+    }
+
+    let filename = req.body.product_img.replace(/^.*[\\\/]/, "");
+    return Product.create({
+      product_name: req.body.product_name,
+      product_price: req.body.product_price,
+      product_description: req.body.product_description,
+      product_img: filename,
+      category: req.body.category,
+      product_quantity: req.body.product_quantity,
+    })
       .then((product) => res.status(201).send(product))
       .catch((error) => res.status(400).json({ message: error }));
   },
@@ -26,35 +47,30 @@ module.exports = {
     console.log(perPage);
     console.log(category);
 
-    if(+page && +perPage){
-                    
-      let filter = {}; 
-      if(category) filter.category = category;
+    if (+page && +perPage) {
+      let filter = {};
+      if (category) filter.category = category;
 
-      page = (+page) - 1;                      
+      page = +page - 1;
     }
     if (category) {
-      return Product.findAll(
-        {
-          limit: perPage,
-          offset: page * perPage,
-          where: { category: category },
-        }
-      )
+      return Product.findAll({
+        limit: perPage,
+        offset: page * perPage,
+        where: { category: category },
+      })
         .then((product) => {
           console.log(product);
           res.status(201).send(product);
         })
         .catch((error) => res.status(400).json({ message: "Error" }));
     }
-    
-    return Product.findAll(
-        {
-          limit: perPage,
-          offset: page * perPage,
-          //where: { category: category },
-        }
-      )
+
+    return Product.findAll({
+      limit: perPage,
+      offset: page * perPage,
+      //where: { category: category },
+    })
       .then((product) => {
         console.log(product);
         res.status(201).send(product);
@@ -86,11 +102,11 @@ module.exports = {
       })
       .catch((error) => res.status(400).json({ message: "Error" }));
   },
-  delete(req,res) {
-    return Product.destroy({where: { product_id: req.params.id }})
-    .then(() => {
-      res.status(200).json({ message: "product deleted successfully"})
-    })
-    .catch((error) => res.status(204).json({ message: "delete error"}))
+  delete(req, res) {
+    return Product.destroy({ where: { product_id: req.params.id } })
+      .then(() => {
+        res.status(200).json({ message: "product deleted successfully" });
+      })
+      .catch((error) => res.status(204).json({ message: "delete error" }));
   },
 };

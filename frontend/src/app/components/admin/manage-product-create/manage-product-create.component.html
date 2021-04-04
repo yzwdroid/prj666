@@ -3,22 +3,22 @@
   <br />
   <form action="" [formGroup]="productForm" (ngSubmit)="onSubmit()" class="container">
       <div class="form-row">
-          <div class="form-group col-5">
-            <label>Product Category</label>
-            <select formControlName="category" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.category.errors }">
-              <option *ngFor="let cate of categories" [value]="cate">{{cate}}</option>
-            </select>
-            <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
-                <div *ngIf="f.category.errors.required">Product Category is required</div>
-            </div>
+        <div class="form-group col-5">
+          <label>Product Name</label>
+          <input type="text" formControlName="product_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.product_name.errors }" />
+          <div *ngIf="submitted && f.product_name.errors" class="invalid-feedback">
+            <div *ngIf="f.product_name.errors.required">Product Name is required</div>
           </div>
-          <div class="form-group col-5">
-              <label>Product Name</label>
-              <input type="text" formControlName="product_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.product_name.errors }" />
-              <div *ngIf="submitted && f.product_name.errors" class="invalid-feedback">
-                  <div *ngIf="f.product_name.errors.required">Product Name is required</div>
-              </div>
+        </div>
+        <div class="form-group col-5">
+          <label>Product Category</label>
+          <select formControlName="category" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.category.errors }">
+            <option *ngFor="let cate of categories" [value]="cate">{{cate}}</option>
+          </select>
+          <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
+              <div *ngIf="f.category.errors.required">Product Category is required</div>
           </div>
+        </div>
           <div class="form-group col-5">
             <label>Product Price</label>
             <input type="number" step="0.01" min="0" formControlName="product_price" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.product_price.errors }" />
@@ -42,7 +42,7 @@
           </div>
           <div class="form-group col-3">
             <label>Product Image</label>
-            <input type="file" formControlName="product_img" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.product_img.errors }" accept="image/*"/>
+            <input type="file" (change)="selectFile($event)" formControlName="product_img" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.product_img.errors }" accept="image/*"/>
             <div *ngIf="submitted && f.product_img.errors" class="invalid-feedback">
                 <div *ngIf="f.product_img.errors.required">Product Image is required</div>
             </div>

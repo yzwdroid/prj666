@@ -7,24 +7,42 @@ import { first } from 'rxjs/operators';
 @Component({
   selector: 'app-manage-product-create',
   templateUrl: './manage-product-create.component.html',
-  styleUrls: ['./manage-product-create.component.css']
+  styleUrls: ['./manage-product-create.component.css'],
 })
 export class ManageProductCreateComponent implements OnInit {
-
   productForm = new FormGroup({});
   loading = false;
   submitted = false;
   deleting = false;
-  categories: string[] = ["Books", "Business Cards", "Calendars", "Carbonless Forms", "Copy & Prints",
-"Door Hangers", "Envelopes", "Flyers & Brochures", "Feature Sheets", "Letterheads",
-"Notepads", "Postcards", "Pocket Folders", "Tickets", "Magnets", "Posters",
-"Real Estate Signs", "Banner & Displays", "Window Graphics", "Sign Accessories"];
+  categories: string[] = [
+    'Books',
+    'Business Cards',
+    'Calendars',
+    'Carbonless Forms',
+    'Copy & Prints',
+    'Door Hangers',
+    'Envelopes',
+    'Flyers & Brochures',
+    'Feature Sheets',
+    'Letterheads',
+    'Notepads',
+    'Postcards',
+    'Pocket Folders',
+    'Tickets',
+    'Magnets',
+    'Posters',
+    'Real Estate Signs',
+    'Banner & Displays',
+    'Window Graphics',
+    'Sign Accessories',
+  ];
+  fileToUpload: File;
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private productService: ProductService,
+    private productService: ProductService
   ) {
     this.buildGroupForm();
   }
@@ -43,29 +61,34 @@ export class ManageProductCreateComponent implements OnInit {
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.productForm.controls; }
+  get f() {
+    return this.productForm.controls;
+  }
+
+  selectFile(event: any): void {
+    this.fileToUpload = event.target.files[0];
+  }
 
   onSubmit() {
     this.submitted = true;
 
     // stop here if form is invalid
     if (this.productForm.invalid) {
-        return;
+      return;
     }
-    console.log(this.productForm.value);
-    this.loading = true;
-    this.productService.create(this.productForm.value)
-        .pipe(first())
-        .subscribe({
-            next: () => {
-                //this.alertService.success('Update successful', { keepAfterRouteChange: true });
-                this.router.navigate(['../'], { relativeTo: this.route });
-            },
-            error: error => {
-                //this.alertService.error(error);
-                this.loading = false;
-            }
-        });
-  }
 
+    this.loading = true;
+    this.productService
+      .upload(this.productForm, this.fileToUpload)
+      .subscribe({
+        next: () => {
+          //this.alertService.success('Update successful', { keepAfterRouteChange: true });
+          this.router.navigate(['../'], { relativeTo: this.route });
+        },
+        error: (error) => {
+          //this.alertService.error(error);
+          this.loading = false;
+        },
+      });
+  }
 }
