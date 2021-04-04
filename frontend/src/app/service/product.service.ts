@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from './../../environments//environment';
+import { FormGroup } from '@angular/forms';
 
 const BASEURL = environment.apiUrl;
 
@@ -37,5 +38,24 @@ export class ProductService {
   create(body: any): Observable<any> {
     console.log(body);
     return this.http.post(`${BASEURL}/product`, body);
+  }
+
+  upload(body: FormGroup, file: File): Observable<HttpEvent<any>> {
+    const formData: FormData = new FormData();
+
+    Object.keys(body.controls).forEach((key) => {
+      formData.append(key, body.get(`${key}`).value);
+    });
+
+    formData.append('file', file);
+
+    const req = new HttpRequest('POST', `${BASEURL}/product`, formData, {
+      reportProgress: true,
+      responseType: 'json',
+    });
+
+    console.log("does this work" + file);
+
+    return this.http.request(req);
   }
 }
