@@ -24,11 +24,12 @@ import { RouterModule } from '@angular/router';
 import { CookieModule } from 'ngx-cookie';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
-import {FlexLayoutModule} from "@angular/flex-layout";
+import { FlexLayoutModule } from "@angular/flex-layout";
 import { CheckoutService } from './service/checkout.service';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { BannerComponent } from './components/banner/banner.component';
 import { AdminModule } from './components/admin/admin.module';
+import { AddressService } from './service/address.service';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,7 @@ import { AdminModule } from './components/admin/admin.module';
   FooterComponent,
 ],
 schemas: [ CUSTOM_ELEMENTS_SCHEMA],
-  providers: [AuthService, ShoppingCartService, ProductService, HttpClientModule, CheckoutService],
+  providers: [AuthService, ShoppingCartService, ProductService, HttpClientModule, CheckoutService, AddressService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,6 +4,6 @@ export class Customer {
   password: string;
   first_name: string;
   last_name: string;
-  // billing_address_id: Int32Array;
-  // shipping_address_id: Int32Array;
+  shipping_address_id: number;
+  customer_id: string;
 }

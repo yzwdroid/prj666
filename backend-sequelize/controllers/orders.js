@@ -25,6 +25,8 @@ module.exports = {
     let total = json.total.toFixed(2);
     let taxes = json.taxes;
     let products = json.products;
+    let customer_id = json.customer_id;
+    let address_id = json.address_id;
 
     let validated_total = 0;
 
@@ -88,19 +90,18 @@ module.exports = {
       country: country,
     };
 
+    Address.upsert(order_address).then((address) => {
+      address_id = address.address_id;
+    });
+
     const order = {
       order_date: Date.now(),
       order_status: "placed",
-      order_shipping_address_id: 999,
+      order_shipping_address_id: address_id,
       order_total_plus_tax: validated_server_total,
       tax_rate: sales_tax_rate_canada[state].sales_tax,
+      customer_id: customer_id,
     };
-
-    let address_id = "";
-
-    Address.create(order_address).then((address) => {
-      address_id = address.address_id;
-    });
 
     Orders.create(order)
       .then((order) => {
@@ -128,28 +129,6 @@ module.exports = {
           .status(500)
           .json({ message: `Error occured for placing order: + ${err}` });
       });
-
-    // await db.sequelize.query(
-    //   `INSERT INTO order (order_date, order_status, order_shipping_address_id)
-    //   VALUES (:order_date, :order_status, :order_shipping_address_id)`,
-    //   {
-    //     replacements: {
-    //       order_date: order.order_date,
-    //       order_status: "placed",
-    //       order_shipping_address_id: "999",
-    //     },
-    //   }
-    // );
-
-    // return Order.create(order)
-    //   .then((user) => {
-    //     res.status(201).json({ message: "Order placed successfully" });
-    //   })
-    //   .catch((err) => {
-    //     res
-    //       .status(500)
-    //       .json({ message: `Error occured for placing order: + ${err}` });
-    //   });
   },
   async handleRequest(req, res) {
     let results = await Orders.findOne({
@@ -174,12 +153,22 @@ module.exports = {
     try {
       order = await payPalClient.client().execute(request);
     } catch (err) {
-      // 4. Handle any errors from the call
       console.error(err);
       return res.sendStatus(500);
     }
 
-    // 5. Return a successful response to the client with the order ID
+    db.sequelize.query(
+      `UPDATE Orders
+        SET transaction_id = :trans_id
+        WHERE order_id = :order_id`,
+      {
+        replacements: {
+          order_id: req.params.id,
+          trans_id: order.result.id,
+        },
+      }
+    );
+
     res.status(200).json({
       orderID: order.result.id,
     });

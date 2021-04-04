@@ -4,6 +4,7 @@ const order_detail = require("./order_detail");
 const shipment = require("./shipment");
 const product = require("./product");
 const token = require("./token");
+const address = require("./address");
 
 module.exports = {
   customer: customer,
@@ -12,4 +13,5 @@ module.exports = {
   shipment: shipment,
   product: product,
   token: token,
+  address: address,
 };
