@@ -55,7 +55,7 @@ module.exports = {
           order_id: responses[0].order_id,
           order_date: responses[0].order_date,
           order_status: responses[0].order_status,
-          order_number: responses[0].order_number,
+          transaction_id: responses[0].transaction_id,
           order_shipping_address_id: responses[0].order_shipping_address_id,
           products: product_array,
         };
