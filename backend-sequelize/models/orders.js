@@ -12,9 +12,10 @@ const model = (sequelize, DataTypes) => {
       order_date: { type: DataTypes.DATE, defaultValue: sequelize.NOW },
       order_status: DataTypes.STRING,
       order_shipping_address_id: DataTypes.INTEGER,
-      order_number: DataTypes.INTEGER,
+      transaction_id: DataTypes.INTEGER,
       tax_rate: DataTypes.DOUBLE,
       order_total_plus_tax: DataTypes.DOUBLE,
+      customer_id: DataTypes.UUID,
     },
     {
       indexes: [
