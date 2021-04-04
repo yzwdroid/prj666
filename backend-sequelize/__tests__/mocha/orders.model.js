@@ -17,7 +17,7 @@ describe("/models/order", () => {
   checkModelName(Orders)("Orders");
 
   context("properties", () => {
-    ["order_id", "order_date", "order_status", "order_shipping_address_id", "order_number"].forEach(
+    ["order_id", "order_date", "order_status", "order_shipping_address_id", "transaction_id"].forEach(
       checkPropertyExists(orders)
     );
   });

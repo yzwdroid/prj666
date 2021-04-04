@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       invoice_date: { type: DataTypes.DATE, defaultValue: sequelize.NOW },
       payment_method: DataTypes.STRING,
-      order_number: {
+      transaction_id: {
         type: DataTypes.UUID,
         references: { model: "Order", key: "order_id" },
       },
