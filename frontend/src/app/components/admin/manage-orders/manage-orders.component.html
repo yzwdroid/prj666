@@ -16,7 +16,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let order of orders" [order]="order">
-        <td>{{order.order_number}}</td>
+        <td>{{order.transaction_id}}</td>
         <td>{{order.order_status}}</td>
         <td>{{order.order_total_plus_tax}}</td>
         <td>{{order.order_date}}</td>
