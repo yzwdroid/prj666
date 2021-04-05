@@ -14,6 +14,12 @@ export class OrderService {
   public getAll(): Observable<any> {
     return this.http.get(`${BASEURL}/order`);
   }
+  public getAllByCustomer(id): Observable<any> {
+    let params = {
+     customerid :id,
+    };
+    return this.http.get(`${BASEURL}/order`, { params });
+  }
 
   public getOrders(page): Observable<any> {
     const perPage = 9;
