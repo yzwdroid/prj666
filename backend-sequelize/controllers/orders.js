@@ -174,10 +174,11 @@ module.exports = {
     });
   },
   findAll(req, res) {
-    if(req.params.customerid){
-    console.log("findAll ex with parms");
+    console.log(req);
+    if(req.query.customerid){
+        console.log("findAll ex with parms");
         return Orders.findAll({
-          where: {customer_id: req.params.id},
+          where: { customer_id: req.query.customerid },
       })
         .then((orders) => {
           res.status(201).send(orders);
