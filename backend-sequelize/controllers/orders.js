@@ -174,6 +174,17 @@ module.exports = {
     });
   },
   findAll(req, res) {
+    if(req.params.customerid){
+    console.log("findAll ex with parms");
+        return Orders.findAll({
+          where: {customer_id: req.params.id},
+      })
+        .then((orders) => {
+          res.status(201).send(orders);
+        })
+        .catch((error) => res.status(400).json({ message: "Error" }));
+
+    }
     console.log("findAll ex");
     return Orders.findAll({
       order: [["order_date", "DESC"]],

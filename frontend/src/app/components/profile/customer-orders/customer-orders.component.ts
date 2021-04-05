@@ -23,7 +23,13 @@ export class CustomerOrdersComponent implements OnInit {
           console.log(this.customer.email +' Order are found!');
         }
       });
-  this.data.getAllByCustomer(this.customer.customer_id).subscribe((data) => (this.orders = data));
+  // this.data.getAllByCustomer(this.customer.customer_id).subscribe((data) => (this.orders = data));
+  //   if (this.orders) {
+  //     console.log('Order are found!');
+  //   } else {
+  //     console.log('No Order!');
+  //   }
+    this.data.getAll().subscribe((data) => (this.orders = data));
     if (this.orders) {
       console.log('Order are found!');
     } else {

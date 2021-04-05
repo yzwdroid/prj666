@@ -15,7 +15,10 @@ export class OrderService {
     return this.http.get(`${BASEURL}/order`);
   }
   public getAllByCustomer(id): Observable<any> {
-    return this.http.get(`${BASEURL}/order/${id}`);
+    let params = {
+     customerid :id,
+    };
+    return this.http.get(`${BASEURL}/order`, { params });
   }
 
   public getOrders(page): Observable<any> {
