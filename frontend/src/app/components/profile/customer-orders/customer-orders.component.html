@@ -1,0 +1,36 @@
+  <h1>Order Info</h1>
+  <!--<a (click)="addUser()" class="btn btn-primary mb-3">add</a>-->
+  <div class="container row">
+    <div   class="col-md-6">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Order Number</th>
+        <th>Order Status</th>
+        <th>Order Total Price</th>
+        <th>Order Date</th>
+
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let order of orders" [order]="order">
+        <td>{{order.transaction_id}}</td>
+        <td>{{order.order_status}}</td>
+        <td>{{order.order_total_plus_tax}}</td>
+        <td>{{order.order_date}}</td>
+        <td><a [routerLink]="['/admin/order-detail', order.order_id]"><button type="button" class="btn btn-primary">Detail</button></a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div   class="col-md-6">
+    </div>
+
+
+<br>
+<br>
+<br>
+<div>
+  <h3>To make changes or cancel an order, please call us.</h3>
+</div>

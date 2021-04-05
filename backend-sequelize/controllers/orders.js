@@ -174,8 +174,19 @@ module.exports = {
     });
   },
   findAll(req, res) {
+    console.log("findAll ex");
     return Orders.findAll({
       order: [["order_date", "DESC"]],
+    })
+      .then((orders) => {
+        res.status(201).send(orders);
+      })
+      .catch((error) => res.status(400).json({ message: "Error" }));
+  },
+  findByCustomer(req, res) {
+    console.log("findbycustomer ex");
+    return Orders.findAll({
+      where: {customer_id: req.params.id},
     })
       .then((orders) => {
         res.status(201).send(orders);
