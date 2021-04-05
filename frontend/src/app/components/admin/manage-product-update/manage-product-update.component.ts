@@ -64,21 +64,22 @@ export class ManageProductUpdateComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
-    this.loading = true;
+    // this.submitted = true;
+    // this.loading = true;
 
-    this.productService
-      .upload(this.productForm, this.fileToUpload)
-      .subscribe({
-        next: () => {
-          //this.alertService.success('Update successful', { keepAfterRouteChange: true });
-          this.router.navigate(['../'], { relativeTo: this.route });
-        },
-        error: (error) => {
-          //this.alertService.error(error);
-          this.loading = false;
-        },
-      });
+    // this.productService
+    //   .upload(this.productForm, this.fileToUpload)
+    //   .subscribe({
+    //     next: () => {
+    //       //this.alertService.success('Update successful', { keepAfterRouteChange: true });
+    //       this.router.navigate(['../'], { relativeTo: this.route });
+    //     },
+    //     error: (error) => {
+    //       //this.alertService.error(error);
+    //       this.loading = false;
+    //     },
+    //   });
+    this.router.navigate(['/admin/products'], { relativeTo: this.route });
   }
 }
 

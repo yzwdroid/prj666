@@ -47,7 +47,7 @@ export class SignupComponent implements OnInit {
           .then(()=>{
             window.location.reload();
           });
-        }, 3000);
+        });
       },
       err => {
         if (err.error.msg) {
