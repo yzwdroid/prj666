@@ -22,7 +22,7 @@ import { ManageProductUpdateComponent } from './manage-product-update/manage-pro
     ManageProductsComponent,
     ManageOrderDetailComponent,
     ManageProductCreateComponent,
-    ManageProductUpdateComponent
+    ManageProductUpdateComponent,
   ],
   imports: [
     CommonModule,
