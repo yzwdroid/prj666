@@ -54,13 +54,31 @@ export class ProductService {
       responseType: 'json',
     });
 
-    console.log("does this work" + file);
-
     return this.http.request(req);
   }
 
   delete(id: any): Observable<any> {
     console.log(id);
     return this.http.delete(`${BASEURL}/product/${id}`);
+  }
+
+  uploadUpdate(id: string, body: FormGroup, file: File): Observable<any> {
+    const formData: FormData = new FormData();
+
+    formData.append('product_id', id);
+
+    Object.keys(body.controls).forEach((key) => {
+      if (body.get(`${key}`).value !== null)
+        formData.append(key, body.get(`${key}`).value);
+    });
+
+    formData.append('file', file);
+
+    const req = new HttpRequest('POST', `${BASEURL}/product/${id}`, formData, {
+      reportProgress: true,
+      responseType: 'json',
+    });
+
+    return this.http.request(req);
   }
 }

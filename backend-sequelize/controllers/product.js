@@ -13,16 +13,15 @@ module.exports = {
       }
 
       res.status(500).send({
-        message: `Could not upload the file: ${req.file.originalname}. ${err}`,
+        message: `Could not upload the file: ${req.body.product_img}. ${err}`,
       });
     }
 
-    let filename = req.body.product_img.replace(/^.*[\\\/]/, "");
     return Product.create({
       product_name: req.body.product_name,
       product_price: req.body.product_price,
       product_description: req.body.product_description,
-      product_img: filename,
+      product_img: res.req.file.filename,
       category: req.body.category,
       product_quantity: req.body.product_quantity,
     })
@@ -86,19 +85,59 @@ module.exports = {
       })
       .catch((error) => res.status(400).json({ message: "Error" }));
   },
-  update(req, res) {
-    return Product.findOne({ where: { product_id: req.params.id } })
-      .then((product) => {
-        if (!product) {
-          res.status(201).send({ message: "No record found" });
-        }
-        const values = constructor(req);
-        product
-          .update(values)
-          .then((update) => res.status(201).send(update))
-          .catch((error) => res.status(400).json({ message: "Error" }));
-      })
-      .catch((error) => res.status(400).json({ message: "Error" }));
+  async update(req, res) {
+    try {
+      await uploadFile(req, res);
+    } catch (err) {
+      if (err.code == "LIMIT_FILE_SIZE") {
+        return res.status(500).send({
+          message: "File size cannot be larger than 2MB!",
+        });
+      }
+
+      res.status(500).send({
+        message: `Could not upload the file: ${req.body.product_img}. ${err}`,
+      });
+    }
+    if (req.body.product_img != null) {
+      return Product.findOne({ where: { product_id: req.params.id } })
+        .then((product) => {
+          if (!product) {
+            res.status(201).send({ message: "No record found" });
+          }
+          product
+            .update({
+              product_name: req.body.product_name,
+              product_price: req.body.product_price,
+              product_description: req.body.product_description,
+              product_img: res.req.file.filename,
+              category: req.body.category,
+              product_quantity: req.body.product_quantity,
+            })
+            .then((update) => res.status(201).send(update))
+            .catch((error) => res.status(400).json({ message: error }));
+        })
+        .catch((error) => res.status(400).json({ message: error }));
+    } else {
+      return Product.findOne({ where: { product_id: req.params.id } })
+        .then((product) => {
+          if (!product) {
+            res.status(201).send({ message: "No record found" });
+          }
+
+          product
+            .update({
+              product_name: req.body.product_name,
+              product_price: req.body.product_price,
+              product_description: req.body.product_description,
+              category: req.body.category,
+              product_quantity: req.body.product_quantity,
+            })
+            .then((update) => res.status(201).send(update))
+            .catch((error) => res.status(400).json({ message: error }));
+        })
+        .catch((error) => res.status(400).json({ message: error }));
+    }
   },
   delete(req, res) {
     return Product.destroy({ where: { product_id: req.params.id } })

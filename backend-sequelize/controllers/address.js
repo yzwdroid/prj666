@@ -21,7 +21,7 @@ module.exports = {
     return Address.findOne({ where: { address_id: req.params.id } })
       .then((address) => {
         if (!address) {
-          res.status(201).send({ message: "No record found" });
+          return res.status(201).send({ message: "No record found" });
         }
         res.status(201).send(address);
       })
@@ -31,7 +31,7 @@ module.exports = {
     return Address.findOne({ where: { address_id: req.params.id } })
       .then((address) => {
         if (!address) {
-          res.status(201).send({ message: "No record found" });
+          return res.status(201).send({ message: "No record found" });
         }
         const values = constructor(req);
         address
