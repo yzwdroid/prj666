@@ -1,6 +1,8 @@
 const Orders = require("../models").Orders;
 const Address = require("../models").Address;
+const Customer = require("../models").Customer;
 const db = require("../models");
+const Op = require("sequelize").Op;
 const paypal = require("@paypal/checkout-server-sdk");
 const payPalClient = require("./paypal/paypal_component");
 
@@ -72,10 +74,6 @@ module.exports = {
       ).toFixed(2);
     }
 
-    console.log("totals");
-    console.log(validated_server_total);
-    console.log(total);
-
     if (validated_server_total !== total) isValidated = false;
 
     if (!isValidated)
@@ -90,9 +88,27 @@ module.exports = {
       country: country,
     };
 
-    Address.upsert(order_address).then((address) => {
-      address_id = address.address_id;
+    const [record, created] = await Address.upsert(order_address, {
+      returning: true,
+    }).catch((error) => {
+      console.log("Address error: " + error);
     });
+
+    address_id = record.address_id;
+
+    await Customer.findOne({ where: { customer_id: customer_id } }).then(
+      (customer) => {
+        customer
+          .update({
+            billing_address_id: address_id,
+            shipping_address_id: address_id,
+          })
+          .then((customer) => {})
+          .catch((err) => {
+            console.log("Customer not updated:" + err);
+          });
+      }
+    );
 
     const order = {
       order_date: Date.now(),
@@ -103,6 +119,7 @@ module.exports = {
       customer_id: customer_id,
     };
 
+    // assume success if process has made it here.
     Orders.create(order)
       .then((order) => {
         products.forEach((product) => {
@@ -149,7 +166,6 @@ module.exports = {
       ],
     });
 
-    let order;
     try {
       order = await payPalClient.client().execute(request);
     } catch (err) {
@@ -175,19 +191,26 @@ module.exports = {
   },
   findAll(req, res) {
     console.log(req);
-    if(req.query.customerid){
-        console.log("findAll ex with parms");
-        return Orders.findAll({
-          where: { customer_id: req.query.customerid },
+    if (req.query.customerid) {
+      console.log("findAll ex with parms");
+      return Orders.findAll({
+        where: {
+          customer_id: req.query.customerid,
+          transaction_id: { [Op.not]: null },
+        },
+        order: [["order_date", "DESC"]],
       })
         .then((orders) => {
           res.status(201).send(orders);
         })
         .catch((error) => res.status(400).json({ message: "Error" }));
-
     }
     console.log("findAll ex");
     return Orders.findAll({
+      where: {
+        transaction_id: { [Op.not]: null },
+        order_total_plus_tax: { [Op.not]: null },
+      },
       order: [["order_date", "DESC"]],
     })
       .then((orders) => {
@@ -198,7 +221,7 @@ module.exports = {
   findByCustomer(req, res) {
     console.log("findbycustomer ex");
     return Orders.findAll({
-      where: {customer_id: req.params.id},
+      where: { customer_id: req.params.id, transaction_id: { [Op.not]: null } },
     })
       .then((orders) => {
         res.status(201).send(orders);

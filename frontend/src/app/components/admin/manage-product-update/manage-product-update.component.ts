@@ -1,168 +1,109 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from '../../../service/product.service';
 import { first } from 'rxjs/operators';
 import { Product } from 'src/app/model/Product';
-import { NgForm } from '@angular/forms';
-
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-manage-product-update',
   templateUrl: './manage-product-update.component.html',
-  styleUrls: ['./manage-product-update.component.css']
+  styleUrls: ['./manage-product-update.component.css'],
 })
 export class ManageProductUpdateComponent implements OnInit {
-
-  product : Product;
-
-  productForm = new FormGroup({});
+  product: Product;
+  product_id: string;
+  apiPicUrl: string = environment.apiUrl + '/pictures';
+  productForm = new FormGroup({
+    product_img: new FormControl(),
+    product_name: new FormControl(null, [Validators.required]),
+    product_price: new FormControl(null, [Validators.required]),
+    product_description: new FormControl(null, [Validators.required]),
+    product_quantity: new FormControl(null, [Validators.required]),
+    category: new FormControl(null, [Validators.required]),
+  });
   loading = false;
   submitted = false;
   deleting = false;
-  categories: string[] = ["Books", "Business Cards", "Calendars", "Carbonless Forms", "Copy & Prints",
-"Door Hangers", "Envelopes", "Flyers & Brochures", "Feature Sheets", "Letterheads",
-"Notepads", "Postcards", "Pocket Folders", "Tickets", "Magnets", "Posters",
-"Real Estate Signs", "Banner & Displays", "Window Graphics", "Sign Accessories"];
+  categories: string[] = [
+    'Books',
+    'Business Cards',
+    'Calendars',
+    'Carbonless Forms',
+    'Copy & Prints',
+    'Door Hangers',
+    'Envelopes',
+    'Flyers & Brochures',
+    'Feature Sheets',
+    'Letterheads',
+    'Notepads',
+    'Postcards',
+    'Pocket Folders',
+    'Tickets',
+    'Magnets',
+    'Posters',
+    'Real Estate Signs',
+    'Banner & Displays',
+    'Window Graphics',
+    'Sign Accessories',
+  ];
   fileToUpload: File;
 
   constructor(
-    private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private productService: ProductService,
-  ) {
-    //this.buildGroupForm();
+    private productService: ProductService
+  ) {}
+
+  ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.productService.getOne(params['id']).subscribe((data) => {
         this.product = data;
-        console.log(this.product);
+        this.product_id = params['id'];
+        if (data) {
+          this.productForm.patchValue({
+            product_name: this.product.product_name,
+            product_price: this.product.product_price,
+            product_description: this.product.product_description,
+            product_quantity: this.product.product_quantity,
+            category: this.product.category,
+          });
+        }
       });
     });
   }
 
-  ngOnInit(): void {
-    //console.log(this.product);
-    this.buildGroupForm();
-  }
-
-  private buildGroupForm() {
-    this.productForm = this.fb.group({
-      product_img: [null, [Validators.required]],
-      product_name: [null, [Validators.required]],
-      product_price: [null, [Validators.required]],
-      product_description: [null, [Validators.required]],
-      product_quantity: [null, [Validators.required]],
-      category: [null, [Validators.required]],
-    });
-  }
-
   // convenience getter for easy access to form fields
-  get f() { return this.productForm.controls; }
+  get f() {
+    return this.productForm.controls;
+  }
+
   selectFile(event: any): void {
     this.fileToUpload = event.target.files[0];
   }
 
   onSubmit() {
-    // this.submitted = true;
-    // this.loading = true;
+    this.submitted = true;
 
-    // this.productService
-    //   .upload(this.productForm, this.fileToUpload)
-    //   .subscribe({
-    //     next: () => {
-    //       //this.alertService.success('Update successful', { keepAfterRouteChange: true });
-    //       this.router.navigate(['../'], { relativeTo: this.route });
-    //     },
-    //     error: (error) => {
-    //       //this.alertService.error(error);
-    //       this.loading = false;
-    //     },
-    //   });
-    this.router.navigate(['/admin/products'], { relativeTo: this.route });
+    // stop here if form is invalid
+    if (this.productForm.invalid) {
+      return;
+    }
+
+    this.loading = true;
+
+    this.productService
+      .uploadUpdate(this.product_id, this.productForm, this.fileToUpload)
+      .subscribe({
+        next: () => {
+          //this.alertService.success('Update successful', { keepAfterRouteChange: true });
+          this.router.navigate(['/admin'], { relativeTo: this.route });
+        },
+        error: (error) => {
+          //this.alertService.error(error);
+          this.loading = false;
+        },
+      });
   }
 }
-
-// import { Component, Input, OnInit } from '@angular/core';
-// import { Router, ActivatedRoute } from '@angular/router';
-// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-// import { ProductService } from '../../../service/product.service';
-// import { first } from 'rxjs/operators';
-// import { Product } from 'src/app/model/Product';
-// import { NgForm } from '@angular/forms';
-
-
-// @Component({
-//   selector: 'app-manage-product-update',
-//   templateUrl: './manage-product-update.component.html',
-//   styleUrls: ['./manage-product-update.component.css']
-// })
-// export class ManageProductUpdateComponent implements OnInit {
-
-//   product : Product;
-
-//   productForm = new FormGroup({});
-//   loading = false;
-//   submitted = false;
-//   deleting = false;
-//   categories: string[] = ["Books", "Business Cards", "Calendars", "Carbonless Forms", "Copy & Prints",
-// "Door Hangers", "Envelopes", "Flyers & Brochures", "Feature Sheets", "Letterheads",
-// "Notepads", "Postcards", "Pocket Folders", "Tickets", "Magnets", "Posters",
-// "Real Estate Signs", "Banner & Displays", "Window Graphics", "Sign Accessories"];
-//   fileToUpload: File;
-
-//   constructor(
-//     private fb: FormBuilder,
-//     private route: ActivatedRoute,
-//     private router: Router,
-//     private productService: ProductService,
-//   ) {
-//     //this.buildGroupForm();
-//     this.route.params.subscribe((params) => {
-//       this.productService.getOne(params['id']).subscribe((data) => {
-//         this.product = data;
-//         console.log(this.product);
-//       });
-//     });
-//   }
-
-//   ngOnInit(): void {
-//     //console.log(this.product);
-//     //this.buildGroupForm();
-//   }
-
-//   // private buildGroupForm() {
-//   //   this.productForm = this.fb.group({
-//   //     product_img: [this.product.product_img, [Validators.required]],
-//   //     product_name: [this.product.product_name, [Validators.required]],
-//   //     product_price: [this.product.product_price, [Validators.required]],
-//   //     product_description: [this.product.product_description, [Validators.required]],
-//   //     product_quantity: [this.product.product_quantity, [Validators.required]],
-//   //     category: [this.product.category, [Validators.required]],
-//   //   });
-//   // }
-
-//   // convenience getter for easy access to form fields
-//   //get f() { return this.productForm.controls; }
-//   selectFile(event: any): void {
-//     this.fileToUpload = event.target.files[0];
-//   }
-
-//   onSubmit() {
-//     this.submitted = true;
-//     this.loading = true;
-
-//     this.productService
-//       .upload(this.productForm, this.fileToUpload)
-//       .subscribe({
-//         next: () => {
-//           //this.alertService.success('Update successful', { keepAfterRouteChange: true });
-//           this.router.navigate(['../'], { relativeTo: this.route });
-//         },
-//         error: (error) => {
-//           //this.alertService.error(error);
-//           this.loading = false;
-//         },
-//       });
-//   }
-// }

@@ -34,7 +34,6 @@ export class PaymentFinishComponent implements OnInit {
   ngOnInit(): void {
     this.products = this.shoppingCartService.shoppingCartList;
     this.total = this.shoppingCartService.getTotal();
-    this.taxes = 0.0;
-    this.discount = 0.0;
+    this.shoppingCartService.emptyCart(); // empty the shopping cart.
   }
 }
