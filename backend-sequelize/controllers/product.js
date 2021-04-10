@@ -99,14 +99,12 @@ module.exports = {
         message: `Could not upload the file: ${req.body.product_img}. ${err}`,
       });
     }
-    console.log("Error here");
     if (req.body.product_img != null) {
       return Product.findOne({ where: { product_id: req.params.id } })
         .then((product) => {
           if (!product) {
             res.status(201).send({ message: "No record found" });
           }
-          console.log("trace");
           product
             .update({
               product_name: req.body.product_name,
@@ -121,7 +119,6 @@ module.exports = {
         })
         .catch((error) => res.status(400).json({ message: error }));
     } else {
-      console.log("Goeshere");
       return Product.findOne({ where: { product_id: req.params.id } })
         .then((product) => {
           if (!product) {
