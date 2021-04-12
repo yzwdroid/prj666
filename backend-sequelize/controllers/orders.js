@@ -259,10 +259,41 @@ module.exports = {
         if (!order) {
           res.status(201).send({ message: "No record found" });
         }
-        order
+        // order
+        //   .update({ order_status: req.body.order_status })
+        //   .then((update) => res.status(201).send(update))
+        //   .catch((error) => res.status(400).json({ message: error }));
+        Customer.findOne({ where: { customer_id: order.customer_id } })
+        .then((customer)=>{
+          if (!customer) {
+            res.status(201).send({ message: "No customer record found" });
+          }
+          console.log(customer.email);
+          order
           .update({ order_status: req.body.order_status })
           .then((update) => res.status(201).send(update))
           .catch((error) => res.status(400).json({ message: error }));
+          var mailOptions = {
+            to: customer.email,
+            from: "lixiaoqity@gmail.com", 
+            subject: "Order status changes",
+            text:
+              "Dear " + customer.email+":" + "\n\n" +
+              "Your Order " + order.transaction_id +" status is changed to be " + order.order_status + ".\n\n",
+          };
+          const sgMail = require("@sendgrid/mail");
+          sgMail.setApiKey(process.env.EMAIL_API_KEY2);
+          sgMail
+            .send(mailOptions)
+            .then(() => {
+              console.log("Send status email successfully!");
+            })
+            .catch((err) => {
+              console.log(`Error sending status email ${err}`);
+            });
+        })
+        .catch((error) => res.status(400).json({ message: error }));
+        
       })
       .catch((error) => res.status(400).json({ message: error }));
   },

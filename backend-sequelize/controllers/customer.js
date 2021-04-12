@@ -102,9 +102,7 @@ module.exports = {
             "If you did not request this, please ignore this email and your password will remain unchanged.\n",
         };
         const sgMail = require("@sendgrid/mail");
-        sgMail.setApiKey(
-          "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"
-        );
+        sgMail.setApiKey(process.env.EMAIL_API_KEY);
         sgMail
           .send(mailOptions)
           .then(() => {
