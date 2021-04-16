@@ -282,7 +282,7 @@ module.exports = {
               "Your Order " + order.transaction_id +" status is changed to be " + order.order_status + ".\n\n",
           };
           const sgMail = require("@sendgrid/mail");
-          sgMail.setApiKey(process.env.EMAIL_API_KEY2);
+          sgMail.setApiKey(process.env.EMAIL_API_KEY);
           sgMail
             .send(mailOptions)
             .then(() => {
