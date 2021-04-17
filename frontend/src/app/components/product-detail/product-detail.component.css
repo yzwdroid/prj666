@@ -4,3 +4,30 @@
   margin-right: auto;
   width: 50%;
 }
+
+h2 {
+  font-size: 3rem;
+}
+
+.product-details p,
+.product-available {
+  font-size: 2rem;
+}
+
+.qty-label {
+  font-size: 1.5rem;
+}
+
+.customButton {
+  background-color: white;
+  border: 1px solid #6c757d;
+  border-radius: 4px;
+  padding: 15px;
+}
+
+.input-number input {
+  width: 20px;
+  border: 1px white;
+  text-align: center;
+  font-size: 2rem;
+}

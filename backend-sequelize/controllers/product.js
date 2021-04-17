@@ -79,7 +79,7 @@ module.exports = {
     return Product.findOne({ where: { product_id: req.params.id } })
       .then((product) => {
         if (!product) {
-          res.status(201).send({ message: "No record found" });
+          return res.status(201).send({ message: "No record found" });
         }
         res.status(201).send(product);
       })
@@ -103,7 +103,7 @@ module.exports = {
       return Product.findOne({ where: { product_id: req.params.id } })
         .then((product) => {
           if (!product) {
-            res.status(201).send({ message: "No record found" });
+            return res.status(201).send({ message: "No record found" });
           }
           product
             .update({
@@ -122,7 +122,7 @@ module.exports = {
       return Product.findOne({ where: { product_id: req.params.id } })
         .then((product) => {
           if (!product) {
-            res.status(201).send({ message: "No record found" });
+            return res.status(201).send({ message: "No record found" });
           }
 
           product

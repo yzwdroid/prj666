@@ -6,7 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-request-reset',
   templateUrl: './response-reset.component.html',
-
+  styleUrls: ['../signin/signin.component.css'],
 })
 export class ResponseResetComponent implements OnInit {
   ResponseResetForm = new FormGroup({});

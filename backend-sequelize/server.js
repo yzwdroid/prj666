@@ -14,7 +14,7 @@ app.use(bodyParser.text());
 app.use(express.urlencoded({ extended: true }));
 
 const models = require("./models");
-const { allowedNodeEnvironmentFlags } = require("process");
+
 global.__basedir = __dirname;
 
 models.sequelize

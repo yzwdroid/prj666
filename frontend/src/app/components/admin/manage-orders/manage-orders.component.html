@@ -2,7 +2,7 @@
   <h1>Order Information</h1>
   <!--<a (click)="addUser()" class="btn btn-primary mb-3">add</a>-->
   <div class="container row">
-    <div   class="col-md-6">
+    <div   class="col-md-12">
     <table class="table">
       <thead>
       <tr>
@@ -18,7 +18,7 @@
       <tr *ngFor="let order of orders" [order]="order">
         <td>{{order.transaction_id}}</td>
         <td>{{order.order_status}}</td>
-        <td>{{order.order_total_plus_tax}}</td>
+        <td>${{order.order_total_plus_tax.toFixed(2)}}</td>
         <td>{{order.order_date}}</td>
 
          <!-- <button type="button" (click)="onDelete()" [disabled]="deleting" class="btn btn-danger">
@@ -34,4 +34,3 @@
     </div>
 
   </div>
-

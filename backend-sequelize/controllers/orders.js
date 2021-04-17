@@ -92,6 +92,7 @@ module.exports = {
       returning: true,
     }).catch((error) => {
       console.log("Address error: " + error);
+      return res.status(400).json({ message: "db error" });
     });
 
     address_id = record.address_id;
@@ -106,6 +107,7 @@ module.exports = {
           .then((customer) => {})
           .catch((err) => {
             console.log("Customer not updated:" + err);
+            return res.status(400).json({ message: "db error" });
           });
       }
     );
@@ -142,7 +144,7 @@ module.exports = {
         });
       })
       .catch((err) => {
-        res
+        return res
           .status(500)
           .json({ message: `Error occured for placing order: + ${err}` });
       });
@@ -203,7 +205,9 @@ module.exports = {
         .then((orders) => {
           res.status(201).send(orders);
         })
-        .catch((error) => res.status(400).json({ message: "Error" }));
+        .catch((error) => {
+          return res.status(400).json({ message: "Error" });
+        });
     }
     console.log("findAll ex");
     return Orders.findAll({
@@ -216,7 +220,9 @@ module.exports = {
       .then((orders) => {
         res.status(201).send(orders);
       })
-      .catch((error) => res.status(400).json({ message: "Error" }));
+      .catch((error) => {
+        return res.status(400).json({ message: "Error" });
+      });
   },
   findByCustomer(req, res) {
     console.log("findbycustomer ex");
@@ -226,13 +232,15 @@ module.exports = {
       .then((orders) => {
         res.status(201).send(orders);
       })
-      .catch((error) => res.status(400).json({ message: "Error" }));
+      .catch((error) => {
+        return res.status(400).json({ message: "Error" });
+      });
   },
   findOne(req, res) {
     return Orders.findOne({ where: { id: req.params.id } })
       .then((order) => {
         if (!order) {
-          res.status(201).send({ message: "No record found" });
+          return res.status(201).send({ message: "No record found" });
         }
         res.status(201).send(order);
       })
@@ -242,7 +250,7 @@ module.exports = {
     return Orders.findOne({ where: { id: req.params.id } })
       .then((order) => {
         if (!order) {
-          res.status(201).send({ message: "No record found" });
+          return res.status(201).send({ message: "No record found" });
         }
         const values = constructor(req);
         order
@@ -257,43 +265,49 @@ module.exports = {
     return Orders.findOne({ where: { order_id: req.params.id } })
       .then((order) => {
         if (!order) {
-          res.status(201).send({ message: "No record found" });
+          return res.status(201).send({ message: "No record found" });
         }
         // order
         //   .update({ order_status: req.body.order_status })
         //   .then((update) => res.status(201).send(update))
         //   .catch((error) => res.status(400).json({ message: error }));
         Customer.findOne({ where: { customer_id: order.customer_id } })
-        .then((customer)=>{
-          if (!customer) {
-            res.status(201).send({ message: "No customer record found" });
-          }
-          console.log(customer.email);
-          order
-          .update({ order_status: req.body.order_status })
-          .then((update) => res.status(201).send(update))
+          .then((customer) => {
+            if (!customer) {
+              return res.status(201).send({ message: "No customer record found" });
+            }
+            console.log(customer.email);
+            order
+              .update({ order_status: req.body.order_status })
+              .then((update) => res.status(201).send(update))
+              .catch((error) => res.status(400).json({ message: error }));
+            var mailOptions = {
+              to: customer.email,
+              from: "411340343@qq.com",
+              subject: "Order status changes",
+              text:
+                "Dear " +
+                customer.email +
+                ":" +
+                "\n\n" +
+                "Your Order " +
+                order.transaction_id +
+                " status is changed to be " +
+                order.order_status +
+                ".\n\n",
+            };
+            const sgMail = require("@sendgrid/mail");
+            sgMail.setApiKey(process.env.EMAIL_API_KEY);
+            sgMail
+              .send(mailOptions)
+              .then(() => {
+                console.log("Send status email successfully!");
+              })
+              .catch((err) => {
+                console.log(`Error sending status email ${err}`);
+              });
+          })
           .catch((error) => res.status(400).json({ message: error }));
-          var mailOptions = {
-            to: customer.email,
-            from: "411340343@qq.com", 
-            subject: "Order status changes",
-            text:
-              "Dear " + customer.email+":" + "\n\n" +
-              "Your Order " + order.transaction_id +" status is changed to be " + order.order_status + ".\n\n",
-          };
-          const sgMail = require("@sendgrid/mail");
-          sgMail.setApiKey(process.env.EMAIL_API_KEY);
-          sgMail
-            .send(mailOptions)
-            .then(() => {
-              console.log("Send status email successfully!");
-            })
-            .catch((err) => {
-              console.log(`Error sending status email ${err}`);
-            });
-        })
-        .catch((error) => res.status(400).json({ message: error }));
-        
       })
       .catch((error) => res.status(400).json({ message: error }));
   },

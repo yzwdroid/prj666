@@ -1,31 +1,38 @@
 @font-face {
-  font-family: 'Montserrat'; /*a name to be used later*/
-  src: url('https://fonts.googleapis.com/css?family=Montserrat'); /*URL to font*/
+  font-family: "Montserrat"; /*a name to be used later*/
+  src: url("https://fonts.googleapis.com/css?family=Montserrat"); /*URL to font*/
 }
+
 footer {
   background-color: #666666;
   color: #fff;
   text-align: center;
-  padding: 16px 0px;
+  padding: 16px 16px;
   font-size: 1.2rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
+  height: 180px;
 }
 .footer-container {
   background-color: #666666;
-
 }
 
 .footer_col {
   padding: 1rem;
 }
 
-div>ul>li{
-
+div > ul > li {
   list-style: none;
 }
 
-div>ul>li>a{
-
+div > ul > li > a {
   color: white;
 }
 
+a {
+  color: black;
+  text-decoration: none;
+}
+
+p {
+  height: 1.2rem;
+}

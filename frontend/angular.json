@@ -24,13 +24,12 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "src/styles.css",
               "src/assets/dist/css/bootstrap.min.css"
             ],
             "scripts": [
-              "src/assets/dist/js/bootstrap.min.js"
+              "src/assets/dist/js/bootstrap.min.js",
+              "node_modules/moment/src/moment.js"
             ]
           },
           "configurations": {
@@ -93,8 +92,6 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "src/styles.css"
             ],
             "scripts": []

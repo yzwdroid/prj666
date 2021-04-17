@@ -89,7 +89,7 @@ module.exports = {
     return Order_Detail.findOne({ where: { order_detail_id: req.params.id } })
       .then((order) => {
         if (!order) {
-          res.status(201).send({ message: "No record found" });
+          return res.status(201).send({ message: "No record found" });
         }
         const values = constructor(req);
         order

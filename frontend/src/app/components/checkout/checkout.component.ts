@@ -20,7 +20,7 @@ interface ProvinceSalesTax {
 @Component({
   selector: 'app-home',
   templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.css'],
+  styleUrls: ['../shopping-cart/shopping-cart.component.css'],
 })
 export class CheckoutComponent implements OnInit {
   products: Array<Product> = [];

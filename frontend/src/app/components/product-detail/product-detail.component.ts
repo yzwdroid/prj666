@@ -39,7 +39,6 @@ export class ProductDetailComponent implements OnInit {
   addProduct(product) {
     if (this.product_quantity === 0) {
       this.shoppingCartService.addToCart(product);
-      return;
     }
     this.product_quantity = this.product_quantity + 1;
     this.updateQuantity(product, this.product_quantity);
