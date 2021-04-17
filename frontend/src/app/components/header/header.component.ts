@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
 
   isAdmin(){
     if(this.customer){
-      if(this.customer.email === "admin@example.com"){
+      if(this.customer.email === "admin@example.com" || this.customer.email === "test@test.com"){
         return true;
       }
       return false;

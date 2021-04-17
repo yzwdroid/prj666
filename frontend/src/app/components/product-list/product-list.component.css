@@ -6,10 +6,6 @@
   user-select: none;
 }
 
-.col {
-  padding-bottom: 2em;
-}
-
 @media (min-width: 768px) {
   .bd-placeholder-img-lg {
     font-size: 3.5rem;
@@ -39,4 +35,30 @@ select option {
 .rightproductview {
   padding-top: 4px;
   background-color: #f8f9fa !important;
+}
+
+a {
+  font-size: 2rem;
+}
+
+button {
+  font-size: 1.5rem;
+  margin-right: 12px;
+  padding: 6px;
+}
+
+h4 {
+  font-size: 3rem;
+}
+
+.card-body p {
+  font-size: 2rem;
+}
+
+.card a {
+  display: flex;
+  padding-top: 12px;
+}
+.card a .img-fluid {
+  margin: auto;
 }

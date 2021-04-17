@@ -21,7 +21,7 @@ module.exports = {
     return Token.findOne({ where: { token_id: req.params.id } })
       .then((token) => {
         if (!token) {
-          res.status(201).send({ message: "No record found" });
+          return res.status(201).send({ message: "No record found" });
         }
         res.status(201).send(token);
       })
@@ -31,7 +31,7 @@ module.exports = {
     return Token.findOne({ where: { token_id: req.params.id } })
       .then((token) => {
         if (!token) {
-          res.status(201).send({ message: "No record found" });
+          return res.status(201).send({ message: "No record found" });
         }
         const values = constructor(req);
         token
@@ -41,52 +41,55 @@ module.exports = {
       })
       .catch((error) => res.status(400).json({ message: "Error" }));
   },
-  delete(req,res) {
-    return Token.destroy({where: { token_id: req.params.id }})
-    .then(() => {
-      res.status(200).json({ message: "token deleted successfully"})
-    })
-    .catch((error) => res.status(204).json({ message: "token delete error"}))
+  delete(req, res) {
+    return Token.destroy({ where: { token_id: req.params.id } })
+      .then(() => {
+        res.status(200).json({ message: "token deleted successfully" });
+      })
+      .catch((error) =>
+        res.status(204).json({ message: "token delete error" })
+      );
   },
-  async freshToken(body){
+  async freshToken(body) {
     Token.findOne({ where: { email: body.email } })
       .then((token) => {
         if (!token) {
-            Token.create(body)
+          Token.create(body)
             .then((token) => console.log("Insert token successfully!"))
             .catch((error) => console.log("fail to insert token!"));
-        }
-        else{
-            token
+        } else {
+          token
             .update(body)
             .then((update) => console.log("Update token successfully!"))
             .catch((error) => console.log("Fail to update token!"));
         }
-
       })
       .catch((error) => console.log("Fresh token crash!"));
   },
-  async validToken(req, res){
+  async validToken(req, res) {
     console.log(req.body);
     if (!req.body.resettoken) {
       return res.status(500).json({ message: "Token is required" });
     }
 
     console.log(req.body.resettoken);
-    const result =await Token.findOne({ where: { token: req.body.resettoken } });
+    const result = await Token.findOne({
+      where: { token: req.body.resettoken },
+    });
     console.log(result);
-    
+
     if (!result || result.token != req.body.resettoken) {
       return res.status(409).json({ message: "Invalid URL" });
     }
 
     const user = await Token.findOne({ where: { email: result.email } });
-    
-    if(user){
+
+    if (user) {
       return res.status(200).json({ message: "Token verified successfully." });
+    } else {
+      return res
+        .status(500)
+        .json({ message: "Token verified unsuccessfully." });
     }
-    else{
-      return res.status(500).json({ message: "Token verified unsuccessfully." });
-    }
-  }
+  },
 };

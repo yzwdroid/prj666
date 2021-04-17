@@ -1,56 +1,58 @@
 <div class="section">
   <!-- container -->
   <div class="container">
-      <!-- Product main img -->
-      <div class="col-md-5">
-        <div id="product-main-img">
-            <div class="product-preview">
-              <img src="{{apiPicUrl}}/{{product.product_img}}" alt="">
-            </div>
+    <!-- Product main img -->
+    <div class="col-md-5">
+      <div id="product-main-img">
+        <div class="product-preview">
+          <img src="{{apiPicUrl}}/{{product.product_img}}" alt="">
         </div>
       </div>
-      <!-- /Product main img -->
+    </div>
+    <!-- /Product main img -->
 
-      <!-- Product details -->
-      <div class="col-md-5 col-sm-2">
-        <div class="product-details">
-          <h2 class="product-name">{{product?.product_name}}</h2>
-          <div>
-            <h3 class="product-price">{{product?.product_price | currency:'USD'}} </h3>
-            <span class="product-available">In Stock</span>
-          </div>
-          <p>{{product?.product_description}}</p>
-
-
-          <div class="add-to-cart">
-            <div class="qty-label">
-              Qty
-              <div class="input-number">
-                <button class="btn btn-danger btn-xs minus" (click)="removeProduct(product)"><i class="glyphicon glyphicon-minus"></i></button>
-                <input class="form-contrl m-2" [(ngModel)]="product_quantity" style="width:20px"/>
-                <button class="btn btn-success btn-xs plus" (click)="addProduct(product)"><i class="glyphicon glyphicon-plus"></i></button>
-              </div>
+    <!-- Product details -->
+    <div class="col-md-5 col-sm-2">
+      <div class="product-details">
+        <h2 class="product-name">{{product?.product_name}}</h2>
+        <br>
+        <h3 class="product-price">{{product?.product_price | currency:'USD'}} each</h3>
+        <hr>
+        <p style="font-style: italic;">Description:</p>
+        <p>{{product?.product_description}}</p>
+        <hr>
+        <div class="add-to-cart">
+          <div class="qty-label">
+            <div class="input-number">
+              <p style="font-style: italic;">Quantity:</p>
+              <button class="btn btn-danger btn-xs minus" (click)="removeProduct(product)"><i
+                  class="glyphicon glyphicon-minus"></i></button>
+              <input class="form-contrl m-2" [(ngModel)]="product_quantity" />
+              <button class="btn btn-success btn-xs plus" (click)="addProduct(product)"><i
+                  class="glyphicon glyphicon-plus"></i></button>
             </div>
-            <br/>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <a [routerLink]="">
-                    <h3 class="h4"><button type="button" [disabled]="isInCart(product) > 0"
-                        class="fa fa-shopping-cart" (click)="addToCart(product)"><span
-                          *ngIf="isInCart(product) > 0"> {{isInCart(product)}} In Cart</span><span *ngIf="!isInCart(product)">Add To
-                          Cart</span></button></h3>
-                  </a>
-                </div>
-              </div>
+          </div>
+          <br />
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <a [routerLink]="">
+                <h3 class="h4"><button type="button" [disabled]="isInCart(product) > 0"
+                    class="fa fa-shopping-cart customButton" (click)="addToCart(product)"><span
+                      *ngIf="isInCart(product) > 0"> {{isInCart(product)}} In
+                      Cart</span><span *ngIf="!isInCart(product)"> Add To
+                      Cart</span></button></h3>
+              </a>
+            </div>
           </div>
         </div>
       </div>
-      <!-- /Product details -->
+    </div>
+    <!-- /Product details -->
   </div>
 </div>
-<hr style="height:4px">
-<div>
-  <h3 class="center">{{product.product_description}}</h3>
+<hr>
+<div class="center">
+  <p style="font-style: italic; font-size: 2rem;">Detail Description:</p>
+  <h3>{{product.product_description}}</h3>
   <img src="{{apiPicUrl}}/{{product.product_img}}" alt="" class="center">
 </div>
-

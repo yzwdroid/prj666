@@ -6,30 +6,32 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['../signin/signin.component.css']
-
+  styleUrls: ['../signin/signin.component.css'],
 })
 export class SignupComponent implements OnInit {
-  SignupForm=new FormGroup({});
+  SignupForm = new FormGroup({});
   forbiddenEmails: any;
   errorMessage: string | any;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router,
+    private router: Router
   ) {
     this.buildSignupForm();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   private buildSignupForm() {
     this.SignupForm = this.fb.group({
       firstName: [null, [Validators.required]],
       lastName: [null, [Validators.required]],
-      email: [null, [Validators.required, Validators.email], this.forbiddenEmails],
+      email: [
+        null,
+        [Validators.required, Validators.email],
+        this.forbiddenEmails,
+      ],
       password: [null, [Validators.required, Validators.minLength(4)]],
     });
   }
@@ -39,17 +41,26 @@ export class SignupComponent implements OnInit {
   }
 
   signupUser() {
+    if (
+      !this.SignupForm.get('email').value ||
+      !this.SignupForm.get('password').value ||
+      !this.SignupForm.get('firstName').value ||
+      !this.SignupForm.get('lastName').value
+    ) {
+      this.errorMessage = 'Please fill in form details.';
+      return;
+    }
+
     this.authService.registerUser(this.SignupForm.value).subscribe(
-      data => {
+      (data) => {
         this.SignupForm.reset();
         setTimeout(() => {
-          this.router.navigate(['sign-in'])
-          .then(()=>{
+          this.router.navigate(['sign-in']).then(() => {
             window.location.reload();
           });
         });
       },
-      err => {
+      (err) => {
         if (err.error.msg) {
           this.errorMessage = err.error.msg[0].message;
         }

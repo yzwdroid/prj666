@@ -49,7 +49,7 @@ module.exports = {
       .then((customer) => {
         console.log(customer);
         if (!customer) {
-          res
+          return res
             .status(201)
             .send({
               message: "No customer found, please input correct email address.",
@@ -169,7 +169,7 @@ module.exports = {
     return Customer.findOne({ where: { customer_id: req.params.id } })
       .then((customer) => {
         if (!customer) {
-          res.status(201).send({ message: "No record found" });
+          return res.status(201).send({ message: "No record found" });
         }
         //console.log(customer);
         res.status(201).send(customer);
@@ -202,7 +202,7 @@ module.exports = {
       Customer.findOne({ where: { customer_id: req.params.id } })
       .then((customer) => {
         if (!customer) {
-          res.status(201).send({ message: "No record found" });
+          return res.status(201).send({ message: "No record found" });
         }
         customer
           .update(values)

@@ -4,15 +4,15 @@
  * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-full-width-pics/blob/master/LICENSE)
  */
 
-
- @font-face {
-  font-family: 'Montserrat'; /*a name to be used later*/
-  src: url('https://fonts.googleapis.com/css?family=Montserrat'); /*URL to font*/
+@font-face {
+  font-family: "Montserrat"; /*a name to be used later*/
+  src: url("https://fonts.googleapis.com/css?family=Montserrat"); /*URL to font*/
 }
- body {
-  padding-top:20px;
-  font-family: 'Montserrat', sans-serif;
-  color:#67B0FF;
+
+body {
+  padding-top: 20px;
+  font-family: "Montserrat", sans-serif;
+  color: #67b0ff;
 }
 
 .bg-image-full {
@@ -22,21 +22,31 @@
   background-size: cover;
   -o-background-size: cover;
 }
-/*#header_banner{
 
-  width: 1440px;
-  height: 421px;
-  float: left;
-  margin:  0,0,20px,0;
-}*/
-.container{
-
+.container {
   grid-gap: 1rem;
-  padding:  20px,20px,20px,20px;
-  margin:  20px,20px,20px,20px;
+  padding: 20px, 20px, 20px, 20px;
+  margin: 20px, 20px, 20px, 20px;
 }
 
+.feature-products {
+  margin: auto;
+  padding-top: 15px;
+  padding-bottom: 30px;
+}
 
+h1 {
+  text-align: center;
+}
 
+.carousel-caption {
+  background-color: rgba(211, 211, 211, 0.5);
+}
 
+.carousel-caption h2 {
+  font-size: 4rem;
+}
 
+.carousel-caption p {
+  font-size: 2rem;
+}

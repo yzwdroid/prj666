@@ -3,14 +3,14 @@
   <br>
   <div class="container row" *ngIf="order_details" style="font-size: 16px;">
     <div class="col-md-12">
-      <table class="table">
+      <table class="table" style="width: 600px">
         <tr>
-          <td>Order Id</td>
-          <td>{{order_details.order_id}}</td>
+          <td>Order Number</td>
+          <td>{{order_details.transaction_id}}</td>
         </tr>
         <tr>
           <td>Order Date</td>
-          <td>{{order_details.order_date.slice(0,10)}}</td>
+          <td>{{order_details.order_date}}</td>
         </tr>
         <tr>
           <td>Order Status</td>
@@ -28,22 +28,22 @@
         </tr>
         <tr>
           <td>Transaction Id</td>
-          <td>{{order_details.transaction_id}}</td>
+          <td>{{order_details.order_id}}</td>
         </tr>
       </table>
       <div class="container">
         <div class="row row-cols-2">
           <div class="col">
             <h2>Customer Details</h2>
-            <br>
             Name: {{order_details.last_name}}, {{order_details.first_name}}<br>
             Email: {{order_details.email}}
           </div>
           <div class="col">
             <h2>Shipping Address</h2>
-            <br>
             {{order_details.address_line_1}}<br>
-            {{order_details.address_line_2}}<br>
+            <span *ngIf="order_details.address_line_2">
+              {{order_details.address_line_2}}<br>
+            </span>
             {{order_details.city}}, {{order_details.province}}<br>
             {{order_details.postal_code}}
           </div>

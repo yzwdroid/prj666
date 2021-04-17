@@ -21,7 +21,7 @@ module.exports = {
     return Shipment.findOne({ where: { shipment_id: req.params.id } })
       .then((shimpent) => {
         if (!shimpent) {
-          res.status(201).send({ message: "No record found" });
+          return res.status(201).send({ message: "No record found" });
         }
         res.status(201).send(shimpent);
       })
@@ -31,7 +31,7 @@ module.exports = {
     return Shipment.findOne({ where: { shipment_id: req.params.id } })
       .then((shipment) => {
         if (!shipment) {
-          res.status(201).send({ message: "No record found" });
+          return res.status(201).send({ message: "No record found" });
         }
         const values = constructor(req);
         shipment
@@ -41,11 +41,11 @@ module.exports = {
       })
       .catch((error) => res.status(400).json({ message: "Error" }));
   },
-  delete(req,res) {
-    return Shipment.destroy({where: { shipment_id: req.params.id }})
-    .then(() => {
-      res.status(200).json({ message: "Shipment deleted successfully"})
-    })
-    .catch((error) => res.status(204).json({ message: "delete error"}))
+  delete(req, res) {
+    return Shipment.destroy({ where: { shipment_id: req.params.id } })
+      .then(() => {
+        res.status(200).json({ message: "Shipment deleted successfully" });
+      })
+      .catch((error) => res.status(204).json({ message: "delete error" }));
   },
 };

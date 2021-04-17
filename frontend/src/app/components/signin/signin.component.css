@@ -4,3 +4,18 @@
   background-size: auto;
   height: 800px;
 }
+
+label, p, a, button, td, th {
+  font-size: 1.5rem;
+}
+
+#errorMsg, .help-block {
+  font-size: 1.5rem;
+  color: red;
+}
+
+.largeButtons {
+  height: 100px;
+  width: 200px;
+}
+

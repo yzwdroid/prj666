@@ -25,8 +25,8 @@
             <div>
               <h6 class="my-0 mb-1">Total (CAD)</h6>
               <small class="text-muted">*Tax calculated at payment</small>
-              <br>
-              <small class="text-muted">*Apply promo codes at checkout</small>
+              <!-- <br>
+              <small class="text-muted">*Apply promo codes at checkout</small> -->
             </div>
             <strong>${{total.toFixed(2)}}</strong>
           </li>
@@ -109,8 +109,9 @@
 
           <hr class="my-4">
 
-          <button class="w-100 btn btn-primary btn-lg" type="submit" routerLink="/checkout">Continue to
+          <button *ngIf="products.length > 0" class="w-100 btn btn-primary btn-lg" type="submit" routerLink="/checkout">Continue to
             checkout</button>
+          <p *ngIf="products.length === 0">Please add an item to continue checkout.</p>
         </form>
       </div>
     </div>

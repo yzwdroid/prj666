@@ -23,7 +23,6 @@ import { ProductService } from './service/product.service';
 import { RouterModule } from '@angular/router';
 import { CookieModule } from 'ngx-cookie';
 import { HomepageComponent } from './components/homepage/homepage.component';
-import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { CheckoutService } from './service/checkout.service';
 import { NgxPayPalModule } from 'ngx-paypal';
@@ -61,7 +60,6 @@ import { AddressService } from './service/address.service';
     NgxPayPalModule,
     AdminModule,
     CookieModule.forRoot(),
-    CarouselModule.forRoot(),
   ],
   exports: [
   HeaderComponent,

@@ -2,6 +2,6 @@
 
 @Component({
   templateUrl: 'layout.component.html',
-  styleUrls: ['./layout.component.css'],
+  styleUrls: ['../signin/signin.component.css']
 })
 export class LayoutComponent {}
