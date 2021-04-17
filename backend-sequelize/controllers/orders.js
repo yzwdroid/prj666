@@ -275,7 +275,7 @@ module.exports = {
           .catch((error) => res.status(400).json({ message: error }));
           var mailOptions = {
             to: customer.email,
-            from: "lixiaoqity@gmail.com", 
+            from: "411340343@qq.com", 
             subject: "Order status changes",
             text:
               "Dear " + customer.email+":" + "\n\n" +

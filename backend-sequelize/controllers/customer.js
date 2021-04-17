@@ -91,7 +91,7 @@ module.exports = {
           .json({ message: "Send reset Password email successfully." });
         var mailOptions = {
           to: user.email,
-          from: "lixiaoqity@gmail.com", //'your email'
+          from: "411340343@qq.com", //'your email'
           subject: "Node.js Password Reset",
           text:
             "You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n" +
