@@ -1,1 +1,1 @@
-PRJ666 Group 4
+NodeJS, Angular, MySql
